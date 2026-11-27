@@ -322,13 +322,13 @@ async function login(){const code=$("#lc").value.trim().toUpperCase().replace(/\
 if(!code)return gerr("اكتب الكود.");
 if(!OK.includes(hh(code)))return gerr("الكود غلط، راجع الكود اللي في النوتة.");
 const pc=D._c||(S&&S.code);if(pc&&pc!=code){D={};localStorage.removeItem("rs_data");localStorage.removeItem("rs_pic")}D._c=code;localStorage.rs_data=JSON.stringify(D);
-$("#lb").disabled=true;let rd=null;try{const r=await api({t:"load",code,token:"local"});if(r&&r.ok&&r.data)rd=JSON.parse(r.data)}catch(e){}$("#lb").disabled=false;if(rd&&(!D.joined||(rd._t||0)>(D._t||0))){D=rd;D._c=code;localStorage.rs_data=JSON.stringify(D);if(D.pic)localStorage.rs_pic=D.pic}const first=!D.joined;S={code,token:"local",name:D._nm||"صاحبي"};localStorage.rs_s=JSON.stringify(S);
+$("#lb").disabled=true;let rd=null;try{const r=await api({t:"load",code,token:"local"});if(r&&r.err=="disabled"){$("#lb").disabled=false;return gerr("الكود ده موقوف حاليًا. كلّمنا على واتساب.")}if(r&&r.ok&&r.data)rd=JSON.parse(r.data)}catch(e){}$("#lb").disabled=false;if(rd&&(!D.joined||(rd._t||0)>(D._t||0))){D=rd;D._c=code;localStorage.rs_data=JSON.stringify(D);if(D.pic)localStorage.rs_pic=D.pic}const first=!D.joined;S={code,token:"local",name:D._nm||"صاحبي"};localStorage.rs_s=JSON.stringify(S);
 if(first)sv("joined",dk());history.replaceState(null,"",location.pathname+location.hash);openApp(first)}
 $("#lb").onclick=login;$$("#gate input").forEach(i=>i.onkeydown=e=>{if(e.key=="Enter")login()});
 function logout(){push();D._c=S.code;localStorage.rs_data=JSON.stringify(D);localStorage.removeItem("rs_s");S=null;location.hash="";location.reload()}
 A.logout=()=>{if(confirm("تخرج من حسابك على الجهاز ده؟ بياناتك محفوظة وهترجع لما تدخل تاني."))logout()};
 function openApp(first){$("#gate").hidden=true;$("#hd").hidden=false;$("#app").hidden=false;$("#tb").hidden=false;hdr();show(true);if(first){add(20,"هدية الانضمام");setTimeout(tour,900)}ach();setTimeout(()=>askNotif(),first?7000:3000)}
-async function bg(){try{const r=await api({t:"load",code:S.code,token:S.token});if(r&&r.ok&&r.data){const sd=JSON.parse(r.data);if((sd._t||0)>(D._t||0)){D=sd;D._c=S.code;if(D.pic)localStorage.rs_pic=D.pic;if(D._nm&&S.name=="صاحبي"){S.name=D._nm;localStorage.rs_s=JSON.stringify(S)}localStorage.rs_data=JSON.stringify(D);rr()}}}catch(e){}}
+async function bg(){try{const r=await api({t:"load",code:S.code,token:S.token});if(r&&r.err=="disabled"){ts("الكود ده اتوقّف");setTimeout(()=>{try{logout()}catch(e){}},1200);return}if(r&&r.ok&&r.data){const sd=JSON.parse(r.data);if((sd._t||0)>(D._t||0)){D=sd;D._c=S.code;if(D.pic)localStorage.rs_pic=D.pic;if(D._nm&&S.name=="صاحبي"){S.name=D._nm;localStorage.rs_s=JSON.stringify(S)}localStorage.rs_data=JSON.stringify(D);rr()}}}catch(e){}}
 /* tour */
 const TS=[["أهلاً بيك في رشد ✦","ده ملفك الشخصي مع نوتتك. هنا بتبني عادات، وتكسر عادات وحشة، وتتعلم وتلعب وتتحسن كل يوم."],["كل يوم نقطة","كل عادة وكل درس وكل لعبة بتديك نقط. اجمع نقط واطلع مستويات واكسب إنجازات."],["دوّر على أي حاجة","دوس على 🔍 أو Ctrl+K وهتلاقي أي درس أو لعبة أو أداة."]];
 function tour(){if(g("tour",0))return;let i=0;const m=$("#tour");m.showModal();m.oncancel=()=>sv("tour",1);const end=()=>{sv("tour",1);m.close();boom()},r=()=>{m.innerHTML=`<div class="tc"><h3>${TS[i][0]}</h3><p>${TS[i][1]}</p><div class="dots">${TS.map((_,j)=>`<i class="${j==i?"on":""}"></i>`).join("")}</div><button id="tn">${i==TS.length-1?"يلا نبدأ":"التالي"}</button> <button class="o" id="tx2">تخطّي</button></div>`;$("#tn").onclick=()=>{++i>=TS.length?end():r()};$("#tx2").onclick=end};r()}
@@ -836,6 +836,29 @@ function askNotif(){try{
   const i=h.lastIndexOf("</div>");return h.slice(0,i)+card+h.slice(i)};
  A.ntx=async()=>{if(!("Notification"in window))return ts("المتصفح ده مش بيدعم تنبيهات");if(g("nt","")==="on")return ts("التنبيهات شغالة بالفعل ✓");sv("ntoff",0);try{const p=await Notification.requestPermission();if(p==="granted"){ts("التنبيهات اتفعلت \u{1F514}");await subPush();rr()}else ts("المتصفح رفض التنبيهات")}catch(e){}};
  setInterval(()=>{try{if(!S)return;if(!("Notification"in window)||Notification.permission!=="granted")return;if(new Date().getHours()<9)return;const dd=dueToday();if(dd.n>0&&g("_nloc","")!==dd.date){sv("_nloc",dd.date);const items=[...dd.habits,...dd.tasks].slice(0,3).join("، ");new Notification("رشد ✦ اللي عليك النهارده",{body:"عندك "+dd.n+" حاجات: "+items,icon:"icon-192.png",dir:"rtl",lang:"ar"})}}catch(e){}},1800000);
+}catch(e){}})();
+</script>
+<script>
+(function(){try{
+ const NOTICE='رشد بيحفظ اسمك وعاداتك ومهامك عشان تتزامن بين أجهزتك. لو حبيت، تقدر تسيب رقم موبايلك و/أو إيميلك (اختياري) عشان نتواصل معاك بخصوص التطبيق. مش بنبيع بياناتك ولا بنشاركها مع حد. تقدر تعدّل أو تمسح بياناتك في أي وقت من هنا. المسؤول عن البيانات: رشدي، واتساب 01101090427.';
+ window._cu=null;window._cuL=0;
+ const _me3=R.me;R.me=()=>{const h=_me3(),c=window._cu||{};
+  const card='<div class="card" style="margin-top:16px" id="pvc"><h3>\u{1F512} بياناتي وخصوصيتي</h3><p class="mut" style="font-size:13.5px">'+NOTICE+'</p>'
+  +'<div class="fr"><input class="fx" id="pvp" type="tel" inputmode="tel" maxlength="16" placeholder="رقم الموبايل (اختياري)" value="'+esc(c.p||"")+'"></div>'
+  +'<div class="fr"><input class="fx" id="pve" type="email" maxlength="80" placeholder="الإيميل (اختياري)" value="'+esc(c.e||"")+'"></div>'
+  +'<label style="display:block;margin:8px 0;font-size:14px"><input type="checkbox" id="pvc1"'+(c.c?' checked':'')+'> أوافق إن رشد يحتفظ بالبيانات دي ويتواصل معايا بخصوص التطبيق</label>'
+  +'<label style="display:block;margin:8px 0;font-size:14px"><input type="checkbox" id="pvc2"'+(c.ann?' checked':'')+'> أوافق أستقبل إعلانات وتحديثات رشد على الإشعارات</label>'
+  +'<div class="fr"><button data-a="pvs">احفظ</button><button class="o" data-a="pvd">امسح كل بياناتي</button></div></div>';
+  const i=h.lastIndexOf("</div>");return h.slice(0,i)+card+h.slice(i)};
+ const _am=R.after_me;R.after_me=()=>{if(_am)_am();if(!window._cuL&&S){window._cuL=1;api({t:"cget",code:S.code}).then(r=>{if(r&&r.ok){window._cu=r.cu?{p:r.cu.p,e:r.cu.e,ann:r.cu.ann,c:r.cu.c}:{};const q=x=>document.getElementById(x);if(r.cu&&q("pvp")){q("pvp").value=r.cu.p||"";q("pve").value=r.cu.e||"";q("pvc1").checked=true;q("pvc2").checked=!!r.cu.ann}}else window._cuL=0})}};
+ A.pvs=async()=>{const q=x=>document.getElementById(x),p=q("pvp").value.trim(),e=q("pve").value.trim(),c1=q("pvc1").checked,c2=q("pvc2").checked;
+  if((p||e||c2)&&!c1)return ts("لازم توافق على حفظ البيانات الأول");
+  const r=await api({t:"cset",code:S.code,consent:c1,p,e,ann:c1&&c2});
+  if(r&&r.ok){window._cu=c1?{p,e,ann:c2,c:Date.now()}:{};ts(c1?"اتحفظت ✓":"اتمسحت بيانات التواصل ✓")}
+  else ts(r&&r.err=="bad-phone"?"رقم الموبايل مش مظبوط":r&&r.err=="bad-email"?"الإيميل مش مظبوط":"حصلت مشكلة، جرّب تاني")};
+ A.pvd=async()=>{if(!confirm("هتتمسح كل بياناتك من السيرفر (النقط والعادات والمهام والتواصل) ومش هترجع. متأكد؟"))return;
+  const r=await api({t:"erase",code:S.code});
+  if(r&&r.ok){S=null;["rs_data","rs_pic","rs_s"].forEach(k=>localStorage.removeItem(k));ts("اتمسح كل حاجة");setTimeout(()=>{location.hash="";location.reload()},900)}else ts("حصلت مشكلة، جرّب تاني")};
 }catch(e){}})();
 </script>
 <script>if("serviceWorker"in navigator){window.addEventListener("load",function(){navigator.serviceWorker.register("sw.js").catch(function(){})})}</script></body></html>
