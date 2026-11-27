@@ -8,8 +8,8 @@
   "scope": "/gift/",
   "display": "standalone",
   "orientation": "portrait",
-  "theme_color": "#071039",
-  "background_color": "#071039",
+  "theme_color": "#2E1F18",
+  "background_color": "#2E1F18",
   "icons": [
     {
       "src": "icon-192.png",
