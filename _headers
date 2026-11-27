@@ -1,0 +1,46 @@
+/
+  Content-Type: text/html;charset=utf-8
+/index.html
+  Content-Type: text/html;charset=utf-8
+/gift/
+  Content-Type: text/html;charset=utf-8
+/gift/index.html
+  Content-Type: text/html;charset=utf-8
+/sw.js
+  Content-Type: text/javascript;charset=utf-8
+/gift/sw.js
+  Content-Type: text/javascript;charset=utf-8
+/manifest.webmanifest
+  Content-Type: application/manifest+json
+/gift/manifest.webmanifest
+  Content-Type: application/manifest+json
+/robots.txt
+  Content-Type: text/plain;charset=utf-8
+/sitemap.xml
+  Content-Type: application/xml;charset=utf-8
+/fonts/TajM.ttf
+  Content-Type: font/ttf
+/fonts/TajB.otf
+  Content-Type: font/otf
+/gift/icon-180.png
+  Content-Type: image/png
+/gift/icon-192.png
+  Content-Type: image/png
+/gift/icon-512.png
+  Content-Type: image/png
+/gift/icon-maskable-192.png
+  Content-Type: image/png
+/gift/icon-maskable-512.png
+  Content-Type: image/png
+/icon-180.png
+  Content-Type: image/png
+/icon-192.png
+  Content-Type: image/png
+/icon-512.png
+  Content-Type: image/png
+/icon-maskable-192.png
+  Content-Type: image/png
+/icon-maskable-512.png
+  Content-Type: image/png
+/og.png
+  Content-Type: image/png
