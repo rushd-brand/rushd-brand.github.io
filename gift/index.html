@@ -1186,7 +1186,7 @@ const BKD={habits:"success",learn:"success",play:"success",tools:"success",wk:"s
 const BT={habits:"العادات",learn:"دروس التطوّر",play:"اختبارات",tools:"يومياتي ومهامي",dn:"إيمان اليوم",quran:"القرآن الكريم",journey:"رحلتي مع النوتة",ow:"دايرة أصحاب النوتة",me:"ملفي",inbox:"الإشعارات",wk:"تأمل ومراجعة",pro:"المذاكرة",plus:"المذاكرة"};
 let bk="",bt="",br="";
 const go=(route,hub,title)=>{bk=hub;bt=title;br=route;location.hash="#"+route};
-document.body.insertAdjacentHTML("beforeend",'<div id="bkb" hidden><button data-a="bkb" aria-label="رجوع">→</button><b id="bkt"></b></div>');
+document.body.insertAdjacentHTML("beforeend",'<div id="bkb" hidden><button data-a="bkb" aria-label="رجوع">→</button><b id="bkt"></b><button data-a="bkh" aria-label="الرئيسية" style="margin-inline-start:auto">🏠</button></div>');
 A.bkb=()=>{const v=vOf();location.hash="#"+((br==v&&bk)?bk:(BKD[v]||"home"))};
 function tfx(){if(!S)return;const v=vOf(),t=TOOLS.includes(v);document.body.classList.toggle("tfull",t);const b=$("#bkb");if(!b)return;b.hidden=!t;if(t)$("#bkt").textContent=(br==v&&bt)||BT[v]||""}
 const rr0=rr;rr=function(){rr0.apply(this,arguments);tfx()};
@@ -1237,7 +1237,7 @@ if(!nd)return["📓","سجّل نوتتك النهارده","اكتب في نو�
 if(left)return["✅","كمّل عاداتك ("+ad(left)+" فاضلة)","علّم اللي خلصته النهارده",()=>{A.ht("month");go("habits","success","عاداتي")}];
 if(w.today.length<w.goal)return["📖","ورد القرآن النهارده","كمّل من آخر صفحة وقفت عندها",()=>HUB.deen.tools[0][3]()];
 return["🎉","يومك تمام","اختم يومك بتأمل سريع",()=>go("wk","success","تأمل ومراجعة")]};
-A.hnext=()=>step()[4]();
+A.hnext=()=>step()[4]();window.__hub={go,HUB,bkset:v=>{bk=v}};
 const Rh=R.home;R.home=()=>{let h=Rh();const s=step(),c=`<div class="card next"><small>خطوتك الجاية</small><h3>${s[0]} ${s[1]}</h3><p class="mut">${s[2]}</p><button data-a="hnext">يلا</button></div><div class="hubg three"><a class="ht" href="#success"><span class="he">🌟</span><b>نجاح</b></a><a class="ht" href="#study"><span class="he">📚</span><b>مذاكرة</b></a><a class="ht" href="#deen"><span class="he">🕌</span><b>دين</b></a></div>`;{const i=h.lastIndexOf('</div>');return i>0?h.slice(0,i)+c+h.slice(i):h+c}};
 /* profile extras */
 const Rme=R.me;R.me=()=>{let h=Rme();const x=`<div class="card"><h3>⚙️ أدوات حسابك</h3><div class="fr"><button class="o" data-a="gtn" data-v="inbox">🔔 الإشعارات</button><button class="o" data-a="alr">⏰ تنبيهاتي</button><button class="o" data-a="tr2">ℹ️ جولة سريعة</button></div><p class="mut"><small>نسخة احتياطية من بياناتك:</small></p><div class="fr"><button data-a="bx">حمّل نسخة</button><button class="o" data-a="bi2">استرجع نسخة</button></div><input type="file" id="bf" accept=".json" hidden></div>`;const i=h.lastIndexOf("</div>");return h.slice(0,i)+x+h.slice(i)};
@@ -1261,13 +1261,11 @@ A.inst=async()=>{if(bip){bip.prompt();try{await bip.userChoice}catch(e){}bip=nul
 A.insg=()=>{const m=$("#tour");m.innerHTML='<div class="tc"><h3>📲 ثبّت رشد على موبايلك</h3><p style="text-align:start">'+(ios?"١. افتح الصفحة في <b>Safari</b>.<br>٢. دوس على زرار المشاركة ⬆️ تحت.<br>٣. اختار <b>«إضافة إلى الشاشة الرئيسية»</b>.<br>٤. افتح رشد من الأيقونة. التنبيهات على الآيفون بتشتغل بس من الأيقونة دي (iOS ١٦.٤ فأعلى).":"١. افتح الصفحة في <b>Chrome</b>.<br>٢. دوس على ⋮ فوق.<br>٣. اختار <b>«تثبيت التطبيق»</b> أو «إضافة إلى الشاشة الرئيسية».<br>٤. هيفتح بملء الشاشة زي أي تطبيق.")+'</p><button id="tx2">تمام</button></div>';m.showModal();$("#tx2").onclick=()=>m.close()};
 A.insx=()=>{sv("insx",1);rr()};
 /* home install nudge (once, dismissible) */
-const Rh=R.home;R.home=()=>{let h=Rh();if(sa||g("insx",0))return h;const c=`<div class="card"><h3>📲 ثبّت رشد على موبايلك</h3><p class="mut">يفتح بملء الشاشة وبتوصلك تذكيراتك.</p><div class="fr"><button data-a="inst">ثبّت</button><button class="o" data-a="insx">مش دلوقتي</button></div></div>`;{const i=h.lastIndexOf('</div>');return i>0?h.slice(0,i)+c+h.slice(i):h+c}};
 /* notebook code from ?nb= */
 try{const u=new URL(location.href),c=(u.searchParams.get("nb")||"").replace(/[^A-Za-z0-9-]/g,"").slice(0,16).toUpperCase();if(c){localStorage.rs_nbp=c;u.searchParams.delete("nb");history.replaceState(null,"",u.pathname+u.search+u.hash)}}catch(e){}
 const nbc=()=>g("nbc","")||"";
 const Rnb=R.nb;R.nb=()=>{if(!g("nbc","")&&localStorage.rs_nbp&&S){sv("nbc",localStorage.rs_nbp);delete localStorage.rs_nbp}let h=Rnb();const P=g("nbp",[]),tot=P.reduce((a,x)=>a+Math.max(0,x.b-x.a+1),0),c=nbc();
-const card=`<div class="card"><h3>🔖 كود نوتتك</h3>${c?`<p class="q" dir="ltr" style="text-align:center">${esc(c)}</p><p class="mut"><small>الكود ده مربوط بحسابك. لو عندك نوتة تانية، اكتب كودها هنا.</small></p>`:`<p class="mut">لو على نوتتك كود أو QR، افتحه بالموبايل أو اكتبه هنا.</p>`}<div class="fr"><input class="fx" id="nbci" dir="ltr" placeholder="مثال: RSD-0001" maxlength="16"><button data-a="nbcs">حفظ</button></div></div>
-<div class="card"><h3>📄 صفحاتي في النوتة</h3><p class="mut">كتبت <b>${ad(tot)}</b> صفحة ${P.length?"في "+ad(P.length)+" مرة":""}</p><div class="fr"><input class="fx" id="nba" type="number" inputmode="numeric" min="1" placeholder="من صفحة"><input class="fx" id="nbb" type="number" inputmode="numeric" min="1" placeholder="لحد صفحة"></div><input class="fx" id="nbn" placeholder="ملاحظة قصيرة (اختياري)"><div class="fr"><button data-a="nbps">سجّل</button></div>${P.slice(-4).reverse().map(x=>`<div class="ti"><span>${x.d} · من ${ad(x.a)} لـ ${ad(x.b)}${x.n?" · "+esc(x.n):""}</span></div>`).join("")}</div>`;
+const card=`<details class="card"><summary><b>📄 سجّل صفحات نوتتك (اختياري)</b></summary><p class="mut">كتبت <b>${ad(tot)}</b> صفحة ${P.length?"في "+ad(P.length)+" مرة":""}</p><div class="fr"><input class="fx" id="nba" type="number" inputmode="numeric" min="1" placeholder="من صفحة"><input class="fx" id="nbb" type="number" inputmode="numeric" min="1" placeholder="لحد صفحة"></div><input class="fx" id="nbn" placeholder="ملاحظة قصيرة (اختياري)"><div class="fr"><button data-a="nbps">سجّل</button></div>${P.slice(-4).reverse().map(x=>`<div class="ti"><span>${x.d} · من ${ad(x.a)} لـ ${ad(x.b)}${x.n?" · "+esc(x.n):""}</span></div>`).join("")}</details>`;
 {const i=h.lastIndexOf('</div>');return i>0?h.slice(0,i)+card+h.slice(i):h+card}};
 A.nbcs=()=>{const v=($("#nbci").value||"").replace(/[^A-Za-z0-9-]/g,"").slice(0,16).toUpperCase();if(v.length<3)return ts("اكتب الكود زي ما هو مكتوب");sv("nbc",v);ts("اتحفظ ✓");rr()};
 A.nbps=()=>{const a=+$("#nba").value,b=+$("#nbb").value||a;if(!a||b<a||b-a>400)return ts("اكتب أرقام صفحات صح");const P=g("nbp",[]);P.push({d:dk(),a,b,n:($("#nbn").value||"").trim().slice(0,60)});sv("nbp",P);try{add(2,"سجّلت صفحات")}catch(e){}ts("اتسجّلت ✓");rr()};
@@ -1323,6 +1321,54 @@ if(typeof qoff==="function"){}
 addEventListener("online",()=>{if(!st.q)dl()});
 addEventListener("offline",()=>{try{ts("إنت أوفلاين. التطبيق شغال بالمحفوظ")}catch(e){}});
 setTimeout(async()=>{await chk();if(!st.q&&navigator.onLine&&S){await dl()}},4000);
+})();
+</script>
+<script id="ph15">
+(()=>{
+const $=q=>document.querySelector(q),H=window.__hub;
+const st=document.createElement("style");st.id="ck";st.textContent=`
+.ckc{padding:18px}.ckh{display:flex;justify-content:space-between;align-items:center;gap:10px}.ckh h3{margin:0}.ckh b{font-size:1.1rem}
+.ckc .xp{margin:12px 0 14px}
+.ci{display:flex;align-items:center;gap:12px;width:100%;text-align:start;background:transparent;color:inherit;border:1px solid var(--line,#0002);border-radius:16px;padding:12px 14px;margin-top:8px;font:inherit;cursor:pointer}
+.ci .ce{font-size:1.4rem}.ci span.t{flex:1;display:flex;flex-direction:column;gap:2px}.ci span.t b{font-size:1rem}.ci span.t small{opacity:.7}
+.ci em{font-style:normal;font-weight:700;min-width:44px;text-align:center}
+.ci.done{opacity:.6}.ci.done span.t b{text-decoration:line-through}
+.ci.next{background:#7D5A44;color:#fff;border-color:#7D5A44}.ci.next em{background:#fff;color:#4A342A;border-radius:12px;padding:6px 12px}
+.thint{margin:0 0 12px;padding:10px 14px;border-radius:14px;background:#7D5A4418;font-weight:600}
+`;document.head.appendChild(st);
+const T=()=>dk();
+const habs=()=>g("hab",[]);
+const nbDone=()=>{try{return nbD().includes(T())}catch(e){return false}};
+const wirdDone=()=>{try{const w=__rw();return w.today.length>0}catch(e){return false}};
+const focDone=()=>((g("p_pd",{})||{})[T()]||0)>0;
+const refl=()=>{const o=(g("rv",{})||{})[T()]||{};return !!(o.i||o.e)};
+const habDone=()=>{const h=habs();return h.length>0&&h.some(x=>(x.d||[]).includes(T()))};
+const fr=()=>!habs().length&&!(()=>{try{return nbD().length}catch(e){return 0}})();
+const open=(f)=>{try{f();H.bkset("home")}catch(e){}};
+const ITEMS=()=>{
+ const hb=habs(),I=[];
+ const hab={k:"hab",e:"🌱",t:hb.length?"علّم عادة النهارده":"ضيف أول عادة",s:hb.length?"عادة واحدة بتعملها تكفي":"عادة صغيرة زي: اشرب ميّه",d:habDone(),f:()=>{A.ht(hb.length?"month":"build");H.go("habits","home","عاداتي")}};
+ const nb={k:"nb",e:"📓",t:"سجّل نوتتك",s:"اكتب في نوتتك الورق وعلّم هنا",d:nbDone(),f:()=>{location.hash="#nb"}};
+ if(fr())return [hab,nb];
+ return [nb,{k:"qr",e:"📖",t:"ورد القرآن",s:"صفحة واحدة على الأقل",d:wirdDone(),f:()=>H.HUB.deen.tools[0][3]()},hab,{k:"fc",e:"🍅",t:"٢٥ دقيقة تركيز",s:"جلسة تركيز واحدة",d:focDone(),f:()=>{A.pgo("pomo");H.go("pro","home","جلسة تركيز")}},{k:"rf",e:"🪞",t:"تأمل سريع",s:"إيه أحسن حاجة النهارده؟",d:refl(),f:()=>H.go("wk","home","تأمل ومراجعة")}]};
+A.cgo=v=>{const it=ITEMS()[+v];if(it)open(it.f)};
+const R0=R.home;
+R.home=()=>{const n=S.name.split(" ")[0],h=new Date().getHours(),gr=h<5?"لسه صاحي":h<12?"صباح الفل":h<18?"نهارك فل":"مساء الفل",I=ITEMS(),dn=I.filter(x=>x.d).length,all=dn==I.length,nx=I.findIndex(x=>!x.d),first=fr();
+if(all&&g("cdone","")!=T()){sv("cdone",T());try{boom()}catch(e){}}
+return `<div class="w"><div class="hd"><h2>${gr} يا ${esc(n)}</h2><p>${first?"ابدأ من هنا: خطوتين بس.":all?"كمّلت كل مهامك. ربنا يبارك لك.":"خلّص مهامك خطوة خطوة."}</p></div>
+<div class="card ckc"><div class="ckh"><h3>${first?"ابدأ من هنا":all?"خلّصت النهارده ✓ 🎉":"مهام النهارده"}</h3><b>${dn}/${I.length}</b></div><div class="xp"><i style="width:${Math.round(dn/I.length*100)}%"></i></div>
+${I.map((x,i)=>`<button class="ci${x.d?" done":i==nx?" next":""}" data-a="cgo" data-v="${i}"><span class="ce">${x.d?"✅":x.e}</span><span class="t"><b>${x.t}</b><small>${x.s}</small></span><em>${x.d?"✓":i==nx?"يلا":""}</em></button>`).join("")}</div>
+<div class="hubg three"><a class="ht" href="#success"><span class="he">🌟</span><b>نجاح</b></a><a class="ht" href="#study"><span class="he">📚</span><b>مذاكرة</b></a><a class="ht" href="#deen"><span class="he">🕌</span><b>دين</b></a></div></div>`};
+A.bkh=()=>{location.hash="#home"};
+/* one plain line at the top of every tool */
+const HINT={"عاداتي":"علّم العادات اللي عملتها النهارده.","جلسة تركيز":"دوس ابدأ، وركّز ٢٥ دقيقة من غير موبايل.","كروت المراجعة":"اكتب سؤال وجوابه، وراجع الكروت كل يوم.","الامتحانات":"ضيف امتحانك وشوف باقي كام يوم.","سجل المذاكرة":"سجّل كام دقيقة ذاكرتها النهارده.","جدول اليوم":"قسّم يومك على فترات واتبعها.","حاسبة الدرجات":"اكتب درجاتك وشوف محتاج كام في النهائي.","المصحف":"اقرأ صفحة واحدة على الأقل النهارده.","استمع للقرآن":"اختار سورة ودوس ▶.","مواعيد الصلاة":"شوف الصلاة الجاية واتجاه القبلة.","أذكار ومسبحة":"اقرأ أذكارك وعدّ على المسبحة.","إيمان اليوم":"علّم صلواتك وورد النهارده.","ختمتي ومناسبات":"تابع ختمتك وشوف المناسبات الجاية.","أهم ٣ مهام":"اكتب أهم ٣ حاجات تخلي يومك ناجح.","تأمل ومراجعة":"اكتب نيتك الصبح وتأملك بالليل.","دروس التطوّر":"اقرا درس واحد النهارده.","ملاحظات":"اكتب أي فكرة قبل ما تنساها.","يومياتي ومهامي":"اكتب يومياتك ومهامك.","اختبارات":"جاوب اختبار صغير وجمّع نقط.","رحلتي مع النوتة":"اتبع الخطوات واحدة واحدة.","دايرة أصحاب النوتة":"ادعو صاحب وتابعوا بعض.","ملفي":"ده حسابك وإعداداتك.","الإشعارات":"آخر تنبيهاتك.","تنبيهاتي":"اختار التنبيهات اللي تفيدك."};
+const r1=rr;rr=function(){r1.apply(this,arguments);try{const t=($("#bkt")||{}).textContent;const v=document.querySelector(".v.on, .v.act, section.v:not([hidden])");const root=[...document.querySelectorAll("section.v")].find(x=>x.offsetParent!==null);if(root&&t&&HINT[t]&&!root.querySelector(".thint")){const w=root.querySelector(".w")||root;w.insertAdjacentHTML("afterbegin",`<p class="thint">${HINT[t]}</p>`)}}catch(e){}};
+/* me: things moved off home */
+const Rm=R.me;R.me=()=>{let h=Rm();const nc=g("nbc","");const x=`<div class="card"><h3>🔖 كود نوتتك</h3>${nc?`<p class="q" dir="ltr" style="text-align:center">${esc(nc)}</p><p class="mut"><small>الكود ده مربوط بحسابك. لو عندك نوتة تانية، اكتب كودها هنا.</small></p>`:`<p class="mut">لو على نوتتك كود أو QR، افتحه بالموبايل أو اكتبه هنا.</p>`}<div class="fr"><input class="fx" id="nbci" dir="ltr" placeholder="مثال: RSD-0001" maxlength="16"><button data-a="nbcs">حفظ</button></div></div>
+
+<div class="card"><h3>🧭 كل الأقسام</h3><div class="fr"><button class="o" data-a="gtn" data-v="journey">رحلتي</button><button class="o" data-a="gtn" data-v="ow">دايرة النوتة والتحدي</button><button class="o" data-a="gpl">اختبارات</button></div></div>`;const i=h.lastIndexOf("</div>");return i>0?h.slice(0,i)+x+h.slice(i):h+x};
+A.gpl=()=>{H.go("play","me","اختبارات")};
+try{rr()}catch(e){}
 })();
 </script>
 </body></html>
