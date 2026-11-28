@@ -36,5 +36,40 @@
       "purpose": "maskable"
     }
   ],
-  "id": "/gift/"
+  "id": "/gift/",
+  "shortcuts": [
+    {
+      "name": "عاداتي",
+      "short_name": "عاداتي",
+      "url": "/gift/#habits",
+      "icons": [
+        {
+          "src": "icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "القرآن الكريم",
+      "short_name": "القرآن",
+      "url": "/gift/#quran",
+      "icons": [
+        {
+          "src": "icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "نوتتي",
+      "short_name": "نوتتي",
+      "url": "/gift/#nb",
+      "icons": [
+        {
+          "src": "icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    }
+  ]
 }
