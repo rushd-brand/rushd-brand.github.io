@@ -1163,9 +1163,9 @@ if(document.readyState!="loading")go();else document.addEventListener("DOMConten
 // bottom nav "more"
 function mw(){const mr=document.getElementById("mr"),mb=document.getElementById("tmore");if(!mr||!mb)return;
  const IC={pro:"rocket",quran:"book",plus:"spark"};
- const mv=()=>{document.querySelectorAll("#tb>a").forEach(a=>{const v=a.dataset.v;if(["home","nb","habits","quran"].includes(v))return;const n=document.createElement("a");n.href=a.getAttribute("href");n.dataset.v=v;n.innerHTML='<svg viewBox="0 0 24 24"><use href="#i-'+(IC[v]||"spark")+'"/></svg>'+(a.textContent.replace(/[^؀-ۿ\s+\w]/g,"").trim());mr.firstChild.appendChild(n);a.remove()})};
+ const mv=()=>{document.querySelectorAll("#tb>a").forEach(a=>{const v=a.dataset.v;if(["home","nb","success","study","deen"].includes(v))return;const n=document.createElement("a");n.href=a.getAttribute("href");n.dataset.v=v;n.innerHTML='<svg viewBox="0 0 24 24"><use href="#i-'+(IC[v]||"spark")+'"/></svg>'+(a.textContent.replace(/[^؀-ۿ\s+\w]/g,"").trim());mr.firstChild.appendChild(n);a.remove()})};
  mv();new MutationObserver(mv).observe(document.getElementById("tb"),{childList:true});
- const main=["home","nb","habits","quran"];
+ const main=["home","nb","success","study","deen"];
  const sync=()=>{const v=(location.hash||"#home").slice(1);mb.classList.toggle("on",!main.includes(v)&&!!document.querySelector('#mr a[data-v="'+v+'"]'))};
  mb.onclick=e=>{e.preventDefault();mr.hidden=!mr.hidden;mb.setAttribute("aria-expanded",!mr.hidden)};
  mr.onclick=e=>{if(e.target===mr||e.target.closest("a")){mr.hidden=true;mb.setAttribute("aria-expanded","false")}};
