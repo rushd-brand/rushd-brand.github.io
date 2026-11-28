@@ -10,8 +10,8 @@ nbd:R1(12).reverse(),nbp:[{d:dk(1),a:1,b:6,n:"أول أسبوع"},{d:dk(3),a:7,b
 ex:[{n:"امتحان الفيزياء",d:dk(-9)},{n:"امتحان الكيمياء",d:dk(-16)},{n:"امتحان اللغة العربية",d:dk(-24)}],
 p_pd:(function(){var o={};o[dk(1)]=3;o[dk(2)]=4;o[dk(3)]=2;return o})(),
 rf:(function(){var o={};o[dk(1)]={i:"ركّزت ومضيّعتش وقت"};return o})(),
-les:[0,1,2,3,4],cw:{on:1},ac:[],gm:{},cs:{}};
-st.setItem("rs_data",JSON.stringify(D));
+les:[0,1,2,3,4],act:(function(){var o={};R(12).forEach(function(x){o[x]=1});return o})(),cw:{on:1},ac:[],gm:{},cs:{}};
+st.setItem("rs_qtx","1");st.setItem("rs_data",JSON.stringify(D));
 st.setItem("rs_s",JSON.stringify({name:"محمد",code:"DEMO",token:"demo",acct:0}));
 st.setItem("rs_qm",JSON.stringify({fav:[],bm:{s:18,a:10},sz:30,last:18,pg:293}));
 var of=window.fetch;window.fetch=function(u,o){var s=String(u&&u.url||u);if(s.indexOf("rushd-api")>-1){var b={ok:true};try{var q=JSON.parse(o.body);if(q.t==="a_circle")b={ok:true,rows:[{n:"محمد",me:1,days:5},{n:"سارة",days:5},{n:"يوسف",days:4},{n:"منى",days:3}],hidden:0};else if(q.t==="load")b={ok:true,data:D}}catch(e){}return Promise.resolve(new Response(JSON.stringify(b),{status:200,headers:{"Content-Type":"application/json"}}))}return of.apply(this,arguments)};
