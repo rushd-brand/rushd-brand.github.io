@@ -892,6 +892,30 @@ return `<div class="w"><div class="hd"><h2>🤝 أصحاب النوتة</h2><p>�
 const _ho=R.home;R.home=()=>{const h=_ho(),i=h.lastIndexOf("</div>");return h.slice(0,i)+`<div class="card" style="margin-top:16px"><h3>🤝 أصحاب النوتة</h3><p class="mut">ادعو صاحب وشوف مين دخل بدعوتك.</p><a href="#ow"><button>افتح الدايرة</button></a></div>`+h.slice(i)};
 const _ko=kbuild;kbuild=function(){_ko();KI.push({t:"أصحاب النوتة والدعوات",f:()=>location.hash="#ow"})};
 const _oo=openApp;openApp=function(f){_oo(f);owLoad()};
+/* monthly habit grid (tracker table) */
+(()=>{const st=document.createElement("style");st.textContent=".hm-wrap{overflow-x:auto;border-radius:14px;border:1px solid var(--line)}.hm{border-collapse:collapse;min-width:100%;font-size:13px}.hm th,.hm td{padding:3px;text-align:center;border-bottom:1px solid var(--line)}.hm td.nm,.hm th.nm{position:sticky;inset-inline-start:0;background:var(--bg,#F3EBDD);min-width:120px;text-align:start;padding:6px 8px;font-weight:700;z-index:1}.hc{width:26px;height:26px;border-radius:7px;border:1.5px solid #b9a48e;background:transparent;padding:0;cursor:pointer;font-size:13px;color:#fff}.hc.on{background:#7D5A44;border-color:#7D5A44}.hc:disabled{opacity:.3;cursor:default}.hc.td{box-shadow:0 0 0 2px #D7C9B8}.hm-pie{width:96px;height:96px;border-radius:50%;display:grid;place-items:center;flex:none}.hm-pie b{background:var(--card,#fff);width:66px;height:66px;border-radius:50%;display:grid;place-items:center;font-size:18px}.hm-bars{display:flex;gap:8px;align-items:flex-end;height:90px}.hm-bars div{flex:1;text-align:center;font-size:12px}.hm-bars i{display:block;background:#7D5A44;border-radius:6px 6px 0 0;margin-bottom:4px}.hm-pb{height:8px;background:#e6dccd;border-radius:6px;overflow:hidden;min-width:60px}.hm-pb i{display:block;height:100%;background:#7D5A44}";document.head.appendChild(st)})();
+HT.unshift(["month","جدول الشهر"]);
+let HMY=new Date().getFullYear(),HMM=new Date().getMonth();
+const hmKey=(d)=>HMY+"-"+String(HMM+1).padStart(2,"0")+"-"+String(d).padStart(2,"0");
+const HSTART=[["صلاة الفجر في وقتها"],["ورد القرآن"],["أذكار الصباح والمساء"],["مشي أو رياضة"],["قراءة ١٠ صفحات"],["كتابة في النوتة"]];
+A.hmp=v=>{HMM+=+v;if(HMM<0){HMM=11;HMY--}if(HMM>11){HMM=0;HMY++}rr()};
+A.hmt=v=>{const [i,d]=String(v).split(","),hb=g("hab",[]),x=hb[+i];if(!x)return;const k=hmKey(+d),j=x.d.indexOf(k);if(j<0){x.d.push(k);add(3,"عادة اتعملت");log("عادة",x.n)}else x.d.splice(j,1);sv("hab",hb);rr()};
+A.hmst=()=>{const hb=g("hab",[]);HSTART.forEach(a=>{if(!hb.some(x=>x.n==a[0]))hb.push({n:a[0],d:[]})});sv("hab",hb);add(5,"عادات مقترحة");rr()};
+A.hmgo=()=>{ht="my";rr()};
+const hMonth=()=>{const hb=g("hab",[]),N=new Date(HMY,HMM+1,0).getDate(),now=new Date(),cur=now.getFullYear()==HMY&&now.getMonth()==HMM,last=cur?now.getDate():(new Date(HMY,HMM,1)>now?0:N),mn=new Date(HMY,HMM,1).toLocaleDateString("ar-EG",{month:"long",year:"numeric"});
+const nav=`<div class="fr" style="justify-content:space-between;margin-bottom:10px"><button class="o" data-a="hmp" data-v="-1">‹</button><b>${mn}</b><button class="o" data-a="hmp" data-v="1" ${cur?"disabled":""}>›</button></div>`;
+if(!hb.length)return nav+`<div class="card"><h3>جدول عاداتك الشهري</h3><p class="mut">اتابع عاداتك يوم بيوم في جدول واحد، زي ما بتعمل في نوتتك. ابدأ بعادات مقترحة وعدّل عليها، أو ضيف عاداتك.</p><div class="fr"><button data-a="hmst">ضيف عادات مقترحة</button><button class="o" data-a="hmgo">ضيف عادتي</button></div></div>`;
+const done=hb.map(x=>{let c=0;for(let d=1;d<=last;d++)if(x.d.includes(hmKey(d)))c++;return c}),tot=done.reduce((a,b)=>a+b,0),poss=hb.length*last,pc=poss?Math.round(tot/poss*100):0;
+const weeks=[];for(let w=0;w<Math.ceil(N/7);w++){let c=0,p=0;for(let d=w*7+1;d<=Math.min(N,w*7+7);d++){if(d>last)continue;hb.forEach(x=>{p++;if(x.d.includes(hmKey(d)))c++})}weeks.push(p?Math.round(c/p*100):0)}
+const rank=hb.map((x,i)=>({n:x.n,p:last?Math.round(done[i]/last*100):0})).sort((a,b)=>b.p-a.p).slice(0,5);
+const head=`<tr><th class="nm">العادة</th>${Array.from({length:N},(_,i)=>`<th>${i+1}</th>`).join("")}<th>التقدم</th></tr>`;
+const rows=hb.map((x,i)=>`<tr><td class="nm">${esc(x.n)}</td>${Array.from({length:N},(_,j)=>{const d=j+1,on=x.d.includes(hmKey(d)),fut=d>last;return `<td><button class="hc${on?" on":""}${cur&&d==last?" td":""}" data-a="hmt" data-v="${i},${d}" ${fut?"disabled":""} aria-label="${esc(x.n)} ${d}">${on?"✓":""}</button></td>`}).join("")}<td><div class="hm-pb"><i style="width:${last?Math.round(done[i]/last*100):0}%"></i></div><small>${done[i]}/${last}</small></td></tr>`).join("");
+return nav+`<div class="grid"><div class="card"><div class="fr" style="gap:16px"><div class="hm-pie" style="background:conic-gradient(#7D5A44 ${pc*3.6}deg,#e6dccd 0)"><b>${pc}%</b></div><div><h3>التقدم الشهري</h3><p>مكتمل: <b>${tot}</b></p><p class="mut">لسه: ${Math.max(0,poss-tot)}</p></div></div></div>
+<div class="card"><h3>التقدم الأسبوعي</h3><div class="hm-bars">${weeks.map((w,i)=>`<div><i style="height:${Math.max(4,w*0.7)}px"></i>${w}%<br><small class="mut">أسبوع ${i+1}</small></div>`).join("")}</div></div>
+<div class="card"><h3>أكتر عاداتك التزامًا</h3>${rank.map((r,i)=>`<p>${i+1}. ${esc(r.n)} <b>${r.p}%</b></p>`).join("")}</div></div>
+<h3 class="sec">جدول العادات اليومية</h3><div class="hm-wrap"><table class="hm"><thead>${head}</thead><tbody>${rows}</tbody></table></div><div class="fr" style="margin-top:12px"><button class="o" data-a="hmgo">ضيف أو امسح عادة</button><button class="o" data-a="hmst">ضيف العادات المقترحة</button></div>`};
+const _rhm=R.habits;R.habits=()=>ht=="month"?`<div class="w"><div class="hd"><h2>العادات</h2><p>جدول شهري تتابع فيه عاداتك يوم بيوم.</p></div>${tabs(HT,ht,"ht")}${hMonth()}</div>`:_rhm();
+ht="month";
 function boot(){if(S){openApp(false);bg()}}
 if(sessionStorage.getItem("rspl")){sp.remove();boot()}else{sessionStorage.setItem("rspl",1);setTimeout(()=>sp.classList.add("out"),1900);setTimeout(()=>{sp.remove()},2800);boot()}
 
