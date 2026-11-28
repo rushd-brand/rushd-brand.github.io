@@ -872,24 +872,6 @@ try{if(navigator.canShare&&navigator.canShare({files:[f]})){await navigator.shar
 const u=URL.createObjectURL(b),a=document.createElement("a");a.href=u;a.download="rushd-progress.png";a.click();setTimeout(()=>URL.revokeObjectURL(u),4000);ts("اتحفظت صورة تقدمك")}
 A.shc=()=>{shareCard().catch(()=>ts("مقدرناش نعمل الصورة"))};
 const _hs=R.home;R.home=()=>{const h=_hs(),i=h.lastIndexOf("</div>");return h.slice(0,i)+`<div class="card" style="margin-top:16px"><h3>📤 شارك تقدمك</h3><p class="mut">صورة بتقدمك (الستريك والنقط والمستوى) تبعتها لصاحبك.</p><button data-a="shc">اعمل كارت المشاركة</button></div>`+h.slice(i)};
-/* notebook preview: صفحة النوتة */
-const NPU="https://rushd-brand.github.io";
-const npD=()=>new Date().toLocaleDateString("en-CA"),npAll=()=>g("npp",{});
-const npDays=()=>Object.keys(npAll()).filter(k=>{const e=npAll()[k];return e&&(e.i||(e.t||[]).some(Boolean)||e.g||e.c)}).sort();
-const npCta=(why)=>`<div class="card hero" style="margin-top:16px"><small>النوتة الورق</small><h3>${why}</h3><p class="mut">نوتة رشد لسه مش للبيع. سجّل في قايمة الانتظار وهنبلغك أول ما تتاح، من غير أي التزام.</p><a href="${NPU}" target="_blank" rel="noopener"><button>سجّل في قايمة الانتظار</button></a></div>`;
-V.push("np");$("#app").insertAdjacentHTML("beforeend",'<section class="v" id="v-np"></section>');
-$("#nv").insertAdjacentHTML("beforeend",'<a href="#np" data-v="np">جرّب النوتة</a>');$("#tb").insertAdjacentHTML("beforeend",'<a href="#np" data-v="np"><b>🗒️</b>جرّب النوتة</a>');
-A.nps=()=>{const q=s=>(document.querySelector(s)||{}).value||"";const e={i:q("#np-i").trim(),t:[q("#np-t1").trim(),q("#np-t2").trim(),q("#np-t3").trim()],g:q("#np-g").trim(),c:q("#np-c").trim()};if(!(e.i||e.t.some(Boolean)||e.g||e.c)){ts("اكتب حاجة الأول");return}const a=npAll(),first=!a[npD()];a[npD()]=e;sv("npp",a);if(first){add(10,"صفحة النوتة")}log("نوتة",npD());ts("اتحفظت صفحة النهارده");rr()};
-R.np=()=>{const a=npAll(),e=a[npD()]||{i:"",t:["","",""],g:"",c:""},days=npDays(),n=days.length,f=x=>esc(x||"");
-const page=days.slice(-3).reverse().map(k=>{const d=a[k];return `<div class="card" style="background:#F3EBDD;color:#3a2a20;border-radius:14px;background-image:repeating-linear-gradient(transparent,transparent 31px,#cdbba3 32px);line-height:32px"><small style="color:#7D5A44">${new Date(k).toLocaleDateString("ar-EG",{weekday:"long",day:"numeric",month:"long"})}</small>${d.i?`<div><b>نيّتي:</b> ${f(d.i)}</div>`:""}${(d.t||[]).filter(Boolean).map((x,i)=>`<div>${i+1}. ${f(x)}</div>`).join("")}${d.g?`<div><b>الحمد:</b> ${f(d.g)}</div>`:""}${d.c?`<div><b>بكرة هغيّر:</b> ${f(d.c)}</div>`:""}</div>`}).join("");
-const inp=(id,ph,v)=>`<input id="${id}" placeholder="${ph}" value="${f(v)}" maxlength="140" style="width:100%;margin:6px 0">`;
-return `<div class="w"><div class="hd"><h2>🗒️ جرّب النوتة</h2><p>جرّب طريقة نوتة رشد جوه التطبيق. خمس دقايق في اليوم.</p></div>
-<div class="card"><h3>الصبح</h3>${inp("np-i","نيّتي النهارده: إيه اللي عايز أبقى عليه؟",e.i)}<p class="mut">أهم ٣ حاجات النهارده</p>${inp("np-t1","١",e.t[0])}${inp("np-t2","٢",e.t[1])}${inp("np-t3","٣",e.t[2])}
-<h3 style="margin-top:14px">آخر اليوم</h3>${inp("np-g","إيه حاجة أنا ممتن ليها النهارده؟",e.g)}${inp("np-c","إيه الحاجة اللي هغيّرها بكرة؟",e.c)}<button data-a="nps" style="margin-top:10px">احفظ صفحة النهارده</button></div>
-${n?`<h3 class="sec">صفحاتك (${n} ${n==1?"يوم":"أيام"})</h3>${page}`:"<p class='empty'>املا صفحة النهارده وهتلاقيها هنا بشكل ورقة النوتة.</p>"}
-${n>=3?npCta("لاحظت إنك كتبت "+n+" صفحات. تحب تبقى على ورق؟"):n>=1?npCta("صفحتك الأولى اتحفظت. تخيّلها على ورق."):`<div class="card" style="margin-top:16px"><p class="mut">النوتة الورق لسه مش للبيع. جرّب الصفحة هنا الأول.</p></div>`}</div>`};
-const _hn2=R.home;R.home=()=>{const h=_hn2(),i=h.lastIndexOf("</div>"),done=!!npAll()[npD()];return h.slice(0,i)+`<div class="card" style="margin-top:16px"><h3>🗒️ صفحة النهارده ${done?"✓":""}</h3><p class="mut">${done?"كتبت صفحة النهارده. كمّل بكرة.":"نيّة وأهم ٣ حاجات وامتنان. خمس دقايق."}</p><a href="#np"><button${done?' class="o"':""}>${done?"راجع صفحتك":"اكتب صفحة النهارده"}</button></a></div>`+h.slice(i)};
-const _kn2=kbuild;kbuild=function(){_kn2();KI.push({t:"صفحة النهارده (النوتة)",f:()=>location.hash="#np"})};
 function boot(){if(S){openApp(false);bg()}}
 if(sessionStorage.getItem("rspl")){sp.remove();boot()}else{sessionStorage.setItem("rspl",1);setTimeout(()=>sp.classList.add("out"),1900);setTimeout(()=>{sp.remove()},2800);boot()}
 
