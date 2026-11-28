@@ -263,6 +263,19 @@ button .ic,.btn .ic{vertical-align:-.2em}
 .mqw.nt .mqh,.mqw.nt .mqn{color:#D9C7B3;border-color:#4E382C}.mqw.nt .msb{background:#2A1D16;color:#EDE4D8;border-color:#6b5242}.mqw.nt .mqt .ay i{border-color:#8a6e58;color:#D9C7B3}
 @media(prefers-reduced-motion:reduce){.mqp.go{animation:none}}
 </style>
+<style id="hb">
+.hubg{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin:14px 0}.hubg.three{grid-template-columns:repeat(3,1fr)}
+.ht{display:flex;flex-direction:column;align-items:flex-start;justify-content:center;gap:4px;min-height:104px;padding:16px;border-radius:20px;border:1px solid var(--line);background:#fff;color:var(--ink);text-align:start;text-decoration:none;font:inherit;cursor:pointer}
+.ht .he{font-size:28px;line-height:1}.ht b{font-size:17px}.ht small{color:var(--mut);font-size:13px;line-height:1.5}
+.hubg.three .ht{align-items:center;text-align:center;min-height:88px}
+.dk .ht{background:#2A1D16}
+.card.next{border:2px solid var(--c3,#7D5A44)}.card.next button{min-height:48px;padding:0 28px}
+#bkb{position:fixed;top:0;inset-inline:0;z-index:60;height:58px;display:flex;align-items:center;gap:12px;padding:0 12px;background:var(--bg,#F3EBDD);border-bottom:1px solid var(--line)}#bkb[hidden]{display:none}
+#bkb button{width:46px;height:46px;border-radius:50%;border:1px solid var(--line);background:#fff;font-size:22px;color:var(--ink);cursor:pointer}#bkb b{font-size:18px}
+body.tfull #hd,body.tfull #tb{display:none!important}body.tfull #app{padding-top:70px;padding-bottom:30px}
+.dk #bkb{background:#1E1410}.dk #bkb button{background:#2A1D16}
+@media(max-width:380px){.hubg{gap:8px}.ht{padding:12px;min-height:96px}}
+</style>
 </head><body>
 <svg width="0" height="0" style="position:absolute"><defs><symbol id="wm" viewBox="0 0 1180 530"><path fill="currentColor" fill-rule="evenodd" d="M1086 160L1082 164L1058 203L1074 222L1094 250L1114 288L1122 314L1122 333L1119 344L1107 367L1091 387L1067 409L1040 428L1002 448L980 457L933 471L910 475L949 515L981 507L1013 495L1040 482L1069 464L1095 443L1113 424L1132 397L1141 378L1149 353L1153 327L1153 294L1146 257L1137 233L1120 202L1100 175ZM22 325L25 338L35 354L41 359L60 367L74 370L98 372L179 371L217 364L241 352L253 339L259 327L263 313L263 307L265 306L292 335L305 345L325 357L344 365L368 371L408 372L421 370L444 363L472 347L488 334L507 315L541 277L551 271L559 271L564 277L570 318L575 332L584 347L595 358L615 369L629 372L652 372L676 365L691 355L704 341L712 329L728 297L740 278L748 271L760 270L766 273L773 280L808 329L818 340L836 355L862 368L882 372L903 372L920 369L940 360L951 352L962 341L969 331L978 310L982 291L982 269L979 251L973 231L958 199L940 172L918 148L894 187L893 191L916 220L934 252L942 278L942 294L939 304L930 315L920 321L911 324L884 325L871 321L859 314L838 294L810 256L790 235L777 227L761 223L745 224L725 233L709 250L674 309L662 320L653 324L631 324L621 319L611 309L604 297L598 280L591 238L584 228L574 224L557 224L542 228L534 232L516 245L461 300L443 313L429 320L405 326L382 326L370 324L344 315L329 306L300 279L286 260L265 223L247 184L217 104L210 80L208 80L173 113L173 117L186 154L221 236L232 266L236 284L236 295L231 308L218 317L190 323L166 325L90 324L72 320L64 316L57 309L54 301L54 290L56 282L30 281L23 304ZM767 76L761 80L742 100L740 104L740 110L762 133L768 137L771 137L776 134L793 117L799 109L799 104L796 99L777 80L771 76ZM694 76L667 103L667 110L693 136L698 137L722 115L726 108L726 103L703 79L698 76ZM730 13L703 40L702 44L706 51L730 74L735 74L753 58L760 50L763 43L760 37L737 14Z"/></symbol></defs></svg>
 <canvas id="fx"></canvas><div id="cur"></div>
@@ -455,7 +468,7 @@ A.logout=()=>{if(confirm("تخرج من حسابك على الجهاز ده؟ ب
 function openApp(first){$("#gate").hidden=true;$("#hd").hidden=false;$("#app").hidden=false;$("#tb").hidden=false;hdr();show(true);if(first){add(20,"هدية الانضمام");setTimeout(tour,900)}ach();setTimeout(()=>askNotif(),first?7000:3000)}
 async function bg(){try{const r=await api({t:"load",code:S.code,token:S.token});if(r&&r.err=="auth"){ts("سجّل دخولك تاني");setTimeout(()=>{try{logout()}catch(e){}},1200);return}if(r&&r.err=="disabled"){ts("الكود ده اتوقّف");setTimeout(()=>{try{logout()}catch(e){}},1200);return}if(r&&r.ok&&r.data){const sd=JSON.parse(r.data);if((sd._t||0)>(D._t||0)){D=sd;D._c=S.code;if(D.pic)localStorage.rs_pic=D.pic;if(D._nm&&S.name=="صاحبي"){S.name=D._nm;localStorage.rs_s=JSON.stringify(S)}localStorage.rs_data=JSON.stringify(D);rr()}}}catch(e){}}
 /* tour */
-const TS=[["أهلاً بيك في رشد ✦","ده ملفك الشخصي مع نوتتك. هنا بتبني عادات، وتكسر عادات وحشة، وتتعلم وتلعب وتتحسن كل يوم."],["كل يوم نقطة","كل عادة وكل درس وكل لعبة بتديك نقط. اجمع نقط واطلع مستويات واكسب إنجازات."],["دوّر على أي حاجة","دوس على 🔍 أو Ctrl+K وهتلاقي أي درس أو لعبة أو أداة."]];
+const TS=[["أهلاً بيك في رشد ✦","رفيقك على مهل مع نوتتك الورق. هنا بتنظّم عاداتك ومذاكرتك وإيمانك في مكان واحد، من غير ما تتوه."],["خمس أماكن بس","الرئيسية: خطوتك الجاية. نوتتي: سلسلة كتابتك. نجاح: عادات وتأمل وتطوّر. مذاكرة: تركيز وامتحانات. دين: مصحف وصلاة وأذكار."],["أي أداة بتفتح على الشاشة كلها","دوس على أي أداة وهتفتح لوحدها، وزرار → فوق بيرجّعك. وفي الرئيسية دايماً زرار «يلا» بيقولك تعمل إيه دلوقتي."]];;
 function tour(){if(g("tour",0))return;let i=0;const m=$("#tour");m.showModal();m.oncancel=()=>sv("tour",1);const end=()=>{sv("tour",1);m.close();boom()},r=()=>{m.innerHTML=`<div class="tc"><h3>${TS[i][0]}</h3><p>${TS[i][1]}</p><div class="dots">${TS.map((_,j)=>`<i class="${j==i?"on":""}"></i>`).join("")}</div><button id="tn">${i==TS.length-1?"يلا نبدأ":"التالي"}</button> <button class="o" id="tx2">تخطّي</button></div>`;$("#tn").onclick=()=>{++i>=TS.length?end():r()};$("#tx2").onclick=end};r()}
 /* palette */
 let KI=[],ks=0,kr=[];
@@ -706,7 +719,7 @@ A.pmk=(v,t)=>PV("pk",t.value);
 A.ptab=v=>{pt=v;rr()};A.pgo=v=>{pt=v;location.hash="#pro";rr()};
 const card=(t,b,x="")=>`<div class="card ${x}"><h3>${t}</h3>${b}</div>`,stat=(a,b)=>`<div class="card stat"><b>${a}</b><span>${b}</span></div>`;
 const today=()=>({pom:PK("pd",{})[dk()]||0,pr:Object.keys(PK("pr",{})[dk()]||{}).length,pg:(PK("qr",{t:{}}).t||{})[dk()]||0});
-A.pgo=()=>{pt="pomo";location.hash="#pro"};R.pro=()=>{const P={today:rToday,pomo:rPomo,salah:rSalah,iman:rIman,plan:rPlan,notes:rNotes,studio:rStudio,alerts:rAlerts}[pt];return `<div class="w"><div class="hd"><h2>رشد+ <small class="mut">مركز الإنتاجية والإيمان</small></h2><p>${hjs()} · ${new Date().toLocaleDateString("ar-EG",{weekday:"long",day:"numeric",month:"long"})}</p></div>${tabs(TAB,pt,"ptab")}${P()}</div>`};
+R.pro=()=>{const P={today:rToday,pomo:rPomo,salah:rSalah,iman:rIman,plan:rPlan,notes:rNotes,studio:rStudio,alerts:rAlerts}[pt];return `<div class="w"><div class="hd"><h2>${(TAB.find(x=>x[0]==pt)||["",""])[1]}</h2><p>${hjs()} · ${new Date().toLocaleDateString("ar-EG",{weekday:"long",day:"numeric",month:"long"})}</p></div>${P()}</div>`};
 R.after_pro=()=>{if(pt=="notes")nl();if(pt=="plan")tpl()};
 function rToday(){const n=nxt(),t=today(),h=hj(),tp=(PK("tp",{})[dk()]||[]);return `<div class="card hero pro-h"><small>الصلاة الجاية · ${loc().n}</small><h2>${n[1]} <span class="m">${hm(n[2])}</span></h2><div class="big pro-c" id="nxc" style="color:#fff">${cdn(n[2]-Date.now())}</div></div>
 <div class="grid sm">${stat("🍅 "+t.pom,"جلسات تركيز")}${stat("🕌 "+t.pr+"/5","صلوات النهارده")}${stat("📖 "+t.pg,"صفحات قرآن")}${stat("🗓 "+tp.length,"فقرات في جدولك")}</div>
@@ -873,11 +886,11 @@ A.mpb=()=>{const i=SM.bms.indexOf(mqp);if(i<0){SM.bms.push(mqp);SM.bms.sort((a,b
 A.mpd=v=>{SM.bms=SM.bms.filter(x=>x!=+v);ss("rs_qm",SM);rr()};
 A.mps=v=>{SM.msz=Math.max(18,Math.min(44,SM.msz+ +v));ss("rs_qm",SM);rr()};
 A.mpk=()=>{SM.nt=SM.nt?0:1;ss("rs_qm",SM);rr()};
-const qrd0=A.qrd;A.qrd=n=>{qt="read";mqq=+n;mqp=0;rr();scrollTo(0,0)};
+window.__rw=()=>({today:(SM.rd||{})[dk()]||[],goal:SM.wg||4,pg:SM.pg||1,max:SM.max||0,week:new Set([0,1,2,3,4,5,6].flatMap(i=>(SM.rd||{})[dk(i)]||[])).size});A.wdg=v=>{SM.wg=Math.max(1,Math.min(40,(SM.wg||4)+ +v));ss("rs_qm",SM);rr()};const qrd0=A.qrd;A.qrd=n=>{qt="read";mqq=+n;mqp=0;rr();scrollTo(0,0)};
 const mqLbl=p=>{const a=mqD&&mqD[p-1]&&mqD[p-1][0];return a?"سورة "+SN[a.s-1]:""};
 function mqView(){mqLoad();if(mqq&&mqD){mqp=mqS[mqq]||1;mqq=0}if(!mqp)mqp=mqc(SM.pg||1);
 if(!mqD)return mqE==-1?"<div class='card'><p class='empty'>محتاج إنترنت لأول مرة تفتح فيها المصحف. بعد كده بيتحفظ على جهازك وبيشتغل من غير نت.</p></div>":"<div class='card'><p class='empty'>جاري تحميل المصحف…</p></div>";
-SM.pg=mqp;ss("rs_qm",SM);const pg=mqD[mqp-1],f=pg[0],bk=SM.bms.includes(mqp),an=mqa;mqa=0;let h="",cs=0,op=0;
+SM.pg=mqp;{const t=dk();SM.rd=SM.rd||{};const r=SM.rd[t]=SM.rd[t]||[];if(!r.includes(mqp))r.push(mqp);Object.keys(SM.rd).sort().slice(0,-14).forEach(k=>delete SM.rd[k]);SM.max=Math.max(SM.max||0,mqp)}ss("rs_qm",SM);const pg=mqD[mqp-1],f=pg[0],bk=SM.bms.includes(mqp),an=mqa;mqa=0;let h="",cs=0,op=0;
 pg.forEach(a=>{if(a.i==1){if(op){h+="</p>";op=0}h+=`<div class="msb">سورة ${SN[a.s-1]}</div>`+(a.s!=1&&a.s!=9?`<div class="mbs">${mqB}</div>`:"")}if(!op){h+='<p class="mqt">';op=1}h+=`<span class="ay">${a.t}<i>${ad(a.i)}</i></span> `});if(op)h+="</p>";
 const idx=mqi?`<div class="card mqi"><div class="fr"><input class="fx" id="mqn" type="number" min="1" max="604" inputmode="numeric" placeholder="رقم الصفحة (١–٦٠٤)"><button data-a="mpj">اذهب</button></div><div class="fr"><select class="fx" aria-label="السورة" onchange="if(this.value)A.mpg(this.value)"><option value="">اختار سورة…</option>${SN.map((n,i)=>`<option value="${mqS[i+1]}">${ad(i+1)}. ${n}</option>`).join("")}</select><select class="fx" aria-label="الجزء" onchange="if(this.value)A.mpg(this.value)"><option value="">اختار جزء…</option>${Array.from({length:30},(_,i)=>`<option value="${mqJ[i+1]}">الجزء ${ad(i+1)}</option>`).join("")}</select></div><h4>🔖 علاماتي</h4>${SM.bms.length?SM.bms.map(p=>`<div class="ti"><button class="o" data-a="mpg" data-v="${p}">صفحة ${ad(p)} · ${mqLbl(p)}</button><button class="o" data-a="mpd" data-v="${p}" aria-label="حذف العلامة">×</button></div>`).join(""):"<p class='mut'>اضغط على 🔖 فوق الصفحة عشان تحفظ علامة.</p>"}</div>`:"";
 return `<div class="mqw${SM.nt?" nt":""}" style="--qf:${SM.msz}px"><div class="mqbar"><button class="o" data-a="mpt" aria-label="الفهرس">📑 فهرس</button><button class="o" data-a="mpb" aria-label="علامة" aria-pressed="${bk}">${bk?"🔖 محفوظة":"🔖 علّم"}</button><span><button class="o" data-a="mps" data-v="-2" aria-label="تصغير الخط">A−</button> <button class="o" data-a="mps" data-v="2" aria-label="تكبير الخط">A+</button> <button class="o" data-a="mpk" aria-label="الوضع الليلي">${SM.nt?"☀️":"🌙"}</button></span></div>${idx}
@@ -1010,7 +1023,7 @@ const hj=(d,o)=>new Intl.DateTimeFormat("ar-EG-u-ca-islamic-umalqura"+(o?"-nu-la
 const hp=d=>{const p=hj(d,{month:"numeric",day:"numeric"}).split("/").map(Number);return{m:p[0],d:p[1]}};
 const B={
 study:()=>{const t=DK(),f=L("fc",[]),due=f.filter(c=>c.d<=t),c=due[0],ex=L("ex",[]).slice().sort((a,b)=>a.d<b.d?-1:1),lg=L("sg",{}),td=Object.values(lg[t]||{}).reduce((a,b)=>a+b,0),wk=[0,1,2,3,4,5,6].reduce((s,i)=>s+Object.values(lg[DK(-i)]||{}).reduce((a,b)=>a+b,0),0);
-return `<div class="grid">${C("🍅 جلسة تركيز",`<p class="mut">٢٥ دقيقة تركيز و٥ راحة، وبتتسجل في عاداتك.</p><div class="fr"><button data-a="pgo">ابدأ جلسة تركيز</button></div>`)}${C("🗂️ كروت المراجعة (تكرار متباعد)",`<p class="mut">اللي تنساه بيرجعلك بدري، واللي تحفظه بيتباعد. الكروت المستحقة النهارده: <b>${due.length}</b> من ${f.length}</p>`+(c?`<div class="card act"><p class="q">${esc(c.q)}</p>${SW?`<p class="m">${esc(c.a)}</p><div class="fr"><button data-a="fk" data-v="${c.id}:1">عرفتها ✓</button><button class="o" data-a="fk" data-v="${c.id}:0">نسيتها</button></div>`:`<button data-a="fs">اعرض الإجابة</button>`}</div>`:`<p class="okk m">${f.length?"خلصت مراجعة النهارده 🎉":"ضيف كروتك الأول."}</p>`)+`<label for="fq">ضيف كروت (كل سطر: سؤال | إجابة)</label><textarea class="fx" id="fq" placeholder="عاصمة فرنسا | باريس"></textarea><div class="fr"><button data-a="fa">إضافة</button></div>`)}
+return `<div class="grid">${C("🍅 جلسة تركيز",`<p class="mut">٢٥ دقيقة تركيز و٥ راحة، وبتتسجل في عاداتك.</p><div class="fr"><button data-a="pgo" data-v="pomo">ابدأ جلسة تركيز</button></div>`)}${C("🗂️ كروت المراجعة (تكرار متباعد)",`<p class="mut">اللي تنساه بيرجعلك بدري، واللي تحفظه بيتباعد. الكروت المستحقة النهارده: <b>${due.length}</b> من ${f.length}</p>`+(c?`<div class="card act"><p class="q">${esc(c.q)}</p>${SW?`<p class="m">${esc(c.a)}</p><div class="fr"><button data-a="fk" data-v="${c.id}:1">عرفتها ✓</button><button class="o" data-a="fk" data-v="${c.id}:0">نسيتها</button></div>`:`<button data-a="fs">اعرض الإجابة</button>`}</div>`:`<p class="okk m">${f.length?"خلصت مراجعة النهارده 🎉":"ضيف كروتك الأول."}</p>`)+`<label for="fq">ضيف كروت (كل سطر: سؤال | إجابة)</label><textarea class="fx" id="fq" placeholder="عاصمة فرنسا | باريس"></textarea><div class="fr"><button data-a="fa">إضافة</button></div>`)}
 ${C("⏳ امتحاناتك وخطة المذاكرة",ex.map((e,i)=>{const d=DL(e.d);return `<div class="ti"><span><b>${esc(e.n)}</b> · ${d>0?"باقي "+d+" يوم":d==0?"النهارده!":"فات"}${d>0?`<br><small class="mut">ذاكر حوالي ${(e.h/d).toFixed(1)} ساعة في اليوم</small>`:""}</span>${X(i,"ed")}</div>`}).join("")+I("en","اسم المادة")+`<label for="ed">تاريخ الامتحان</label><input class="fx" id="ed" type="date">`+I("eh","عدد ساعات المذاكرة المطلوبة","number")+`<div class="fr"><button data-a="ea">إضافة</button></div>`)}
 ${C("⏱️ سجل المذاكرة",`<p>النهارده: <b>${F(td)}</b> دقيقة · آخر ٧ أيام: <b>${F(wk)}</b> دقيقة</p>`+I("sn","المادة")+I("sm","كام دقيقة ذاكرت؟","number")+`<div class="fr"><button data-a="sl">سجّل</button></div>`)}
 ${C("🧮 محتاج كام في النهائي؟",I("gc","درجتك الحالية في أعمال السنة ٪","number")+I("gw","وزن النهائي ٪ من المادة","number")+I("gt","الدرجة اللي عايزها ٪","number")+`<div class="fr"><button data-a="gn">احسب</button></div><p id="go"></p>`)}</div>`},
@@ -1026,8 +1039,8 @@ return `<div class="grid">${C("🎯 أهم ٣ مهام النهارده",`<p cla
 ${C("📚 كتبي",bk.map((b,i)=>`<div class="ti"><span><b>${esc(b.n)}</b><br><small class="mut">${b.r} / ${b.p} صفحة</small>${PB(b.r/b.p*100)}</span><button data-a="br" data-v="${i}">قرأت</button>${X(i,"bd")}</div>`).join("")+I("bn","اسم الكتاب")+I("bp","عدد صفحاته","number")+`<div class="fr"><button data-a="ba">إضافة</button></div>`)}</div>`},
 kid:()=>`<div class="grid">${C("✖️ جدول الضرب","<p class=mut>١٠ مسائل.. شوف هتجيب كام!</p><div id=xm><button data-a=xms>ابدأ</button></div>")}${C("🧩 ألغاز",`<p class="q">${RD[ri][0]}</p><div id="xr"><button class="o" data-a="xrs">الإجابة</button> <button data-a="xrn">لغز جديد</button></div>`)}${C("🌙 مسابقات للصغار","<p class=mut>أسئلة لسن ٦–١٢.</p>"+QB("ki")+QB("sc"))}</div><div id="xg"></div>`,
 adult:()=>`<div class="grid">${C("🕌 حاسبة الزكاة",I("zm","المبلغ المدّخر","number")+I("zg","سعر جرام الذهب عيار ٢١ اليوم","number")+"<div class=fr><button data-a=zk>احسب</button></div><p id=zo></p><small class=mut>النصاب ٨٥ جرام ذهب عيار ٢٤ ونسبة الزكاة ٢٫٥٪ بعد مرور سنة هجرية. راجع عالماً للتفاصيل.</small>")}${C("💰 ميزانية ٥٠/٣٠/٢٠",I("bi","دخلك الشهري","number")+"<div class=fr><button data-a=bg>وزّع</button></div><p id=bo></p>")}${C("🏦 قسط قرض",I("lp","المبلغ","number")+I("lr","الفائدة السنوية ٪","number")+I("ly","عدد السنين","number")+"<div class=fr><button data-a=ln>احسب</button></div><p id=lo></p>")}${C("⚖️ الوزن والمية",I("bw","وزنك بالكيلو","number")+I("bh","طولك بالسنتي","number")+"<div class=fr><button data-a=bm>احسب</button></div><p id=bmo></p>")}${C("🧠 مسابقة ثقافة عامة",QB("gk"))}</div><div id="xg"></div>`};
-R.plus=()=>`<div class="w"><div class="hd"><h2>مذاكرة ونجاح</h2><p>مذاكرة وتركيز، ودين، ونجاح، في مكان واحد.</p></div>${tabs(T,xt,"xt")}${B[xt]()}</div>`;
-A.xt=v=>{xt=v;Q=null;rr()};
+R.plus=()=>`<div class="w">${xtB()}</div>`;
+let sfx=-1;A.xt=v=>{xt=v;Q=null;sfx=-1;rr()};A.xs=v=>{xt=v;Q=null;sfx=-1;rr()};A.sfx=v=>{xt="study";Q=null;sfx=+v;rr()};const xtB=()=>{if(xt!="study"||sfx<0)return B[xt]();const d=document.createElement("div");d.innerHTML=B.study();const k=d.firstElementChild&&d.firstElementChild.children[sfx];return k?`<div class="grid">${k.outerHTML}</div>`:B.study()};
 /* study */
 A.fs=()=>{SW=1;rr()};A.fa=()=>{const f=L("fc",[]);let n=0;$("#fq").value.split("\n").forEach(l=>{const p=l.split("|");if(p.length>1&&p[0].trim()&&p[1].trim()){f.push({id:Date.now()+n++,q:p[0].trim(),a:p.slice(1).join("|").trim(),b:0,d:DK()})}});if(!n)return ts("اكتب سطر بالشكل: سؤال | إجابة");P("fc",f);ts("اتضاف "+n+" كارت");rr()};
 A.fk=v=>{const[id,k]=v.split(":"),f=L("fc",[]),c=f.find(x=>x.id==id);if(!c)return;c.b=+k?Math.min(6,c.b+1):0;c.d=DK(IV[c.b]);P("fc",f);SW=0;if(+k)add(1,"راجعت كارت");rr()};
@@ -1160,4 +1173,77 @@ function mw(){const mr=document.getElementById("mr"),mb=document.getElementById(
 if(document.readyState!="loading")mw();else document.addEventListener("DOMContentLoaded",mw);
 })();
 </script><script>try{const _h=A.hmt;A.hmt=function(v){const r=_h.apply(this,arguments);const b=document.querySelector('[data-a="hmt"][data-v="'+v+'"]');if(b&&b.classList.contains("on"))b.classList.add("pp");return r}}catch(e){}</script>
+<script id="hubs">
+(()=>{
+const $=q=>document.querySelector(q),ad=n=>String(n).replace(/\d/g,d=>"٠١٢٣٤٥٦٧٨٩"[d]);
+["study","deen","success","wk"].forEach(v=>{if(!V.includes(v)){V.push(v);$("#app").insertAdjacentHTML("beforeend",'<section class="v" id="v-'+v+'"></section>')}});
+const TOOLS=["habits","learn","play","tools","dn","pro","quran","plus","journey","ow","me","inbox","wk"];
+const BKD={habits:"success",learn:"success",play:"success",tools:"success",wk:"success",dn:"deen",quran:"deen",pro:"study",plus:"study",journey:"nb",ow:"nb",me:"home",inbox:"home"};
+const BT={habits:"العادات",learn:"دروس التطوّر",play:"اختبارات",tools:"يومياتي ومهامي",dn:"إيمان اليوم",quran:"القرآن الكريم",journey:"رحلتي مع النوتة",ow:"دايرة أصحاب النوتة",me:"ملفي",inbox:"الإشعارات",wk:"تأمل ومراجعة",pro:"المذاكرة",plus:"المذاكرة"};
+let bk="",bt="",br="";
+const go=(route,hub,title)=>{bk=hub;bt=title;br=route;location.hash="#"+route};
+document.body.insertAdjacentHTML("beforeend",'<div id="bkb" hidden><button data-a="bkb" aria-label="رجوع">→</button><b id="bkt"></b></div>');
+A.bkb=()=>{const v=vOf();location.hash="#"+((br==v&&bk)?bk:(BKD[v]||"home"))};
+function tfx(){if(!S)return;const v=vOf(),t=TOOLS.includes(v);document.body.classList.toggle("tfull",t);const b=$("#bkb");if(!b)return;b.hidden=!t;if(t)$("#bkt").textContent=(br==v&&bt)||BT[v]||""}
+const rr0=rr;rr=function(){rr0.apply(this,arguments);tfx()};
+const hubTile=(h,i,x)=>`<button class="ht" data-a="hgo" data-v="${h}:${i}"><span class="he">${x[0]}</span><b>${x[1]}</b><small>${x[2]}</small></button>`;
+const HUB={
+study:{t:"مذاكرة",d:"ذاكر بتركيز وخلّي امتحاناتك تحت السيطرة.",tools:[
+["🍅","جلسة تركيز","٢٥ دقيقة تركيز و٥ راحة",()=>{A.pgo("pomo");go("pro","study","جلسة تركيز")}],
+["🗂️","كروت المراجعة","تكرار متباعد للحفظ",()=>{A.sfx(1);go("plus","study","كروت المراجعة")}],
+["⏳","الامتحانات","عدّ تنازلي وخطة المذاكرة",()=>{A.sfx(2);go("plus","study","الامتحانات")}],
+["⏱️","سجل المذاكرة","سجّل دقايقك كل يوم",()=>{A.sfx(3);go("plus","study","سجل المذاكرة")}],
+["🗓️","جدول اليوم","قسّم يومك على فترات",()=>{A.pgo("plan");go("pro","study","جدول اليوم")}],
+["🧮","حاسبة الدرجات","محتاج كام في النهائي؟",()=>{A.sfx(4);go("plus","study","حاسبة الدرجات")}]]},
+deen:{t:"دين",d:"قرآنك وصلاتك وأذكارك في مكان واحد.",tools:[
+["📖","المصحف","اقرأ صفحة صفحة واحفظ علامتك",()=>{A.mpg(+(window.__rw?__rw().pg:1)||1);go("quran","deen","المصحف")}],
+["🎧","استمع للقرآن","تلاوات بدون موسيقى",()=>{A.qtab("listen");go("quran","deen","استمع للقرآن")}],
+["🕌","مواعيد الصلاة","القبلة والصلاة الجاية",()=>{A.pgo("salah");go("pro","deen","مواعيد الصلاة")}],
+["📿","أذكار ومسبحة","أذكارك اليومية",()=>{A.pgo("iman");go("pro","deen","أذكار ومسبحة")}],
+["🌙","إيمان اليوم","ورد وصلوات وتتبّع",()=>go("dn","deen","إيمان اليوم")],
+["🕋","ختمتي ومناسبات","ختمة وتاريخ هجري وصيام",()=>{A.xs("din");go("plus","deen","ختمتي ومناسبات")}]]},
+success:{t:"نجاح",d:"عادات صغيرة، وأيام منظّمة، وتطوّر كل أسبوع.",tools:[
+["✅","عاداتي","جدول الشهر وبناء العادات",()=>{A.ht("month");go("habits","success","عاداتي")}],
+["🎯","أهم ٣ مهام","اختار اللي يخلّي يومك ناجح",()=>{A.xs("win");go("plus","success","أهم ٣ مهام")}],
+["🪞","تأمل ومراجعة","نيّة الصبح وتأمل المساء وأسبوعك",()=>go("wk","success","تأمل ومراجعة")],
+["📘","دروس التطوّر","درس صغير كل يوم",()=>{A.lt("les");go("learn","success","دروس التطوّر")}],
+["📝","ملاحظات","اكتب أفكارك",()=>{A.pgo("notes");go("pro","success","ملاحظات")}],
+["🧰","يومياتي ومهامي","يوميات ومهام وتركيز",()=>go("tools","success","يومياتي ومهامي")]]}};
+A.hgo=v=>{const[h,i]=v.split(":");HUB[h].tools[+i][3]()};
+HUB.study.tools.forEach(x=>x[3]=x[3]);
+const wird=()=>{const w=window.__rw?__rw():{today:[],goal:4,pg:1,max:0};const left=Math.max(0,604-w.max),days=Math.ceil(left/w.goal);const n=w.today.length,p=Math.min(100,Math.round(n/w.goal*100));
+return `<div class="card hero wd"><small>ورد اليوم</small><h3>${ad(n)} من ${ad(w.goal)} صفحات</h3><div class="xp"><i style="width:${p}%"></i></div><p class="mut" style="color:#EDE4D8">${w.max?"وصلت لصفحة "+ad(w.max)+" · باقي حوالي "+ad(days)+" يوم للختمة بالمعدل ده":"ابدأ بصفحة النهارده، وهنحسبلك موعد الختمة."}</p><div class="fr"><button style="background:#fff;color:#4A342A" data-a="hgo" data-v="deen:0">📑 كمّل من صفحة ${ad(w.pg)}</button><button class="o" style="color:#fff;border-color:#fff8" data-a="wdg" data-v="-1" aria-label="قلّل الورد">−</button><button class="o" style="color:#fff;border-color:#fff8" data-a="wdg" data-v="1" aria-label="زوّد الورد">+</button></div></div>`};
+const hubV=h=>()=>{const H=HUB[h];return `<div class="w"><div class="hd"><h2>${H.t}</h2><p>${H.d}</p></div>${h=="deen"?wird():""}<div class="hubg">${H.tools.map((x,i)=>hubTile(h,i,x)).join("")}</div></div>`};
+["study","deen","success"].forEach(h=>R[h]=hubV(h));
+/* weekly review + daily intention */
+const wkId=()=>"w"+Math.floor((Date.now()/864e5+3)/7);
+A.rvs=v=>{const o=g("rv",{}),t=dk(),w=wkId();o[t]=o[t]||{};o[w]=o[w]||{};const V_=id=>(document.getElementById(id)||{value:""}).value.trim();
+if(v=="day"){o[t].i=V_("rvi");o[t].e=V_("rve")}else{o[w].l=V_("rvl");o[w].n=V_("rvn")}sv("rv",o);ts("اتحفظت ✓");try{add(2,"تأمل")}catch(e){}rr()};
+R.wk=()=>{const o=g("rv",{}),t=dk(),w=wkId(),dy=o[t]||{},wv=o[w]||{},hb=g("hab",[]),days=[0,1,2,3,4,5,6].map(i=>dk(i));let hd=0,tt=0;hb.forEach(x=>days.forEach(d=>{tt++;if(x.d.includes(d))hd++}));const hp=tt?Math.round(hd/tt*100):0;let nb=0;try{nb=nbD().filter(d=>days.includes(d)).length}catch(e){}const q=window.__rw?__rw().week:0;
+return `<div class="w"><div class="hd"><h2>تأمل ومراجعة</h2><p>دقيقتين كل يوم، وخمس دقايق في الأسبوع.</p></div><div class="grid">
+<div class="card"><h3>🌅 نيّة اليوم</h3><input class="fx" id="rvi" placeholder="إيه أهم حاجة هتعملها النهارده؟" value="${esc(dy.i||"")}"><h3 style="margin-top:14px">🌙 تأمل المساء</h3><textarea class="fx" id="rve" placeholder="إيه أحسن حاجة حصلت النهارده؟ وإيه اللي هتعمله أحسن بكرة؟">${esc(dy.e||"")}</textarea><div class="fr"><button data-a="rvs" data-v="day">حفظ</button></div></div>
+<div class="card"><h3>📊 أسبوعك</h3><div class="grid sm"><div class="card stat"><b>${ad(hp)}٪</b><span>التزام بالعادات</span></div><div class="card stat"><b>${ad(nb)}/٧</b><span>أيام كتبت فيها نوتتك</span></div><div class="card stat"><b>${ad(q)}</b><span>صفحات قرآن</span></div></div><label for="rvl">إيه اللي اتعلمته الأسبوع ده؟</label><textarea class="fx" id="rvl">${esc(wv.l||"")}</textarea><label for="rvn">هتركّز على إيه الأسبوع الجاي؟</label><textarea class="fx" id="rvn">${esc(wv.n||"")}</textarea><div class="fr"><button data-a="rvs" data-v="wk">حفظ المراجعة</button></div></div></div></div>`};
+/* notebook hub links */
+const Rnb=R.nb;R.nb=()=>{let h=Rnb();const l=`<div class="hubg two"><button class="ht" data-a="gtn" data-v="journey"><span class="he">🧭</span><b>رحلتي</b><small>خطوات مع نوتتك</small></button><button class="ht" data-a="gtn" data-v="ow"><span class="he">🤝</span><b>دايرة أصحاب النوتة</b><small>ادعي أصحابك</small></button></div>`;return h.replace('</p></div><div class="grid">','</p></div>'+l+'<div class="grid">')};
+A.gtn=v=>go(v,"nb",BT[v]);
+/* home: one next step */
+const step=()=>{const hb=g("hab",[]),td=dk(),left=hb.filter(x=>!x.d.includes(td)).length;let nd=0;try{nd=nbD().includes(td)}catch(e){}const w=window.__rw?__rw():{today:[],goal:4};
+if(!hb.length)return["🌱","ضيف أول عادة ليك","عادة واحدة صغيرة تكفي النهارده",()=>{A.ht("build");go("habits","success","عاداتي")}];
+if(!nd)return["📓","سجّل نوتتك النهارده","اكتب في نوتتك الورق وعلّم هنا",()=>{location.hash="#nb"}];
+if(left)return["✅","كمّل عاداتك ("+ad(left)+" فاضلة)","علّم اللي خلصته النهارده",()=>{A.ht("month");go("habits","success","عاداتي")}];
+if(w.today.length<w.goal)return["📖","ورد القرآن النهارده","كمّل من آخر صفحة وقفت عندها",()=>HUB.deen.tools[0][3]()];
+return["🎉","يومك تمام","اختم يومك بتأمل سريع",()=>go("wk","success","تأمل ومراجعة")]};
+A.hnext=()=>step()[4]();
+const Rh=R.home;R.home=()=>{let h=Rh();const s=step(),c=`<div class="card next"><small>خطوتك الجاية</small><h3>${s[0]} ${s[1]}</h3><p class="mut">${s[2]}</p><button data-a="hnext">يلا</button></div><div class="hubg three"><a class="ht" href="#success"><span class="he">🌟</span><b>نجاح</b></a><a class="ht" href="#study"><span class="he">📚</span><b>مذاكرة</b></a><a class="ht" href="#deen"><span class="he">🕌</span><b>دين</b></a></div>`;return h.replace('<div class="grid sm">',c+'<div class="grid sm">')};
+/* profile extras */
+const Rme=R.me;R.me=()=>{let h=Rme();const x=`<div class="card"><h3>⚙️ أدوات حسابك</h3><div class="fr"><button class="o" data-a="gtn" data-v="inbox">🔔 الإشعارات</button><button class="o" data-a="alr">⏰ تنبيهاتي</button><button class="o" data-a="tr2">ℹ️ جولة سريعة</button></div><p class="mut"><small>نسخة احتياطية من بياناتك:</small></p><div class="fr"><button data-a="bx">حمّل نسخة</button><button class="o" data-a="bi2">استرجع نسخة</button></div><input type="file" id="bf" accept=".json" hidden></div>`;const i=h.lastIndexOf("</div>");return h.slice(0,i)+x+h.slice(i)};
+A.alr=()=>{A.pgo("alerts");go("pro","home","تنبيهاتي")};A.tr2=()=>{sv("tour",0);tour()};
+/* navigation: 5 destinations */
+const N=[["home","الرئيسية","i-home"],["nb","نوتتي","i-book"],["success","نجاح","i-trend"],["study","مذاكرة","i-check"],["deen","دين","i-mosque"]];
+$("#nv").innerHTML=N.map(([v,t])=>`<a href="#${v}" data-v="${v}">${t}</a>`).join("");
+const tb=$("#tb");tb.querySelectorAll("a").forEach(a=>a.remove());tb.insertAdjacentHTML("afterbegin",N.map(([v,t,i])=>`<a href="#${v}" data-v="${v}"><svg viewBox="0 0 24 24"><use href="#${i}"/></svg>${t}</a>`).join(""));
+const st=document.createElement("style");st.textContent="#tmore,#mr{display:none!important}";document.head.appendChild(st);
+if(S){cur="";show(true)}
+})();
+</script>
 </body></html>
