@@ -246,6 +246,23 @@ button .ic,.btn .ic{vertical-align:-.2em}
 .xp i{transition:width .8s cubic-bezier(.2,.8,.2,1)}
 @media(prefers-reduced-motion:reduce){.hc.pp,.hm-pie,.hm-pie b,.hm-bars i,.bars i,.card.stat b{animation:none!important}.card:hover{transform:none}}
 </style>
+<style id="mq">
+.mqw{max-width:600px;margin:0 auto}.mqbar{display:flex;gap:6px;flex-wrap:wrap;justify-content:space-between;align-items:center;margin:10px 0}.mqbar button{padding:8px 12px}
+.mqp{position:relative;background:#FBF6EC;color:#2A1D16;border:2px solid #B2967D;border-radius:14px;padding:18px 16px 12px;box-shadow:inset 0 0 0 6px #FBF6EC,inset 0 0 0 7px #D7C9B8;touch-action:pan-y}
+.mqp.go{animation:mqin .35s cubic-bezier(.2,.8,.2,1) both}@keyframes mqin{from{opacity:0;transform:translateX(-18px)}}
+.mqh{display:flex;justify-content:space-between;font-size:14px;color:#7D5A44;border-bottom:1px solid #D7C9B8;padding:2px 6px 6px;margin-bottom:6px}
+.mqt{font-family:"Amiri Quran","Scheherazade New","Noto Naskh Arabic","Traditional Arabic",serif;font-size:var(--qf,26px);line-height:2.3;text-align:justify;margin:0;padding:0 6px}
+.mqt .ay i{font-style:normal;display:inline-grid;place-items:center;min-width:1.7em;height:1.7em;border:1.5px solid #B2967D;border-radius:50%;font-size:.5em;margin:0 5px;color:#7D5A44;vertical-align:middle;line-height:1}
+.msb{border:2px solid #B2967D;border-radius:10px;text-align:center;padding:4px;margin:10px 4px 2px;font-family:"Amiri Quran",serif;font-size:calc(var(--qf,26px)*1.1);background:#EFE3D0;color:#4A342A}
+.mbs{text-align:center;font-family:"Amiri Quran",serif;font-size:calc(var(--qf,26px)*1.05);margin:4px 0}
+.mqn{text-align:center;color:#7D5A44;margin-top:8px;font-size:15px}
+.rib{position:absolute;top:-2px;inset-inline-start:18px;width:18px;height:34px;background:#7D5A44;clip-path:polygon(0 0,100% 0,100% 100%,50% 76%,0 100%)}
+.mqnav{display:flex;justify-content:space-between;align-items:center;margin:12px 0}.mqnav button:disabled{opacity:.35}
+.mqi .fr{margin:8px 0}.mqi select{min-width:0;flex:1}.mqs{text-align:center}
+.mqw.nt .mqp{background:#17110d;color:#EDE4D8;border-color:#6b5242;box-shadow:inset 0 0 0 6px #17110d,inset 0 0 0 7px #4E382C}
+.mqw.nt .mqh,.mqw.nt .mqn{color:#D9C7B3;border-color:#4E382C}.mqw.nt .msb{background:#2A1D16;color:#EDE4D8;border-color:#6b5242}.mqw.nt .mqt .ay i{border-color:#8a6e58;color:#D9C7B3}
+@media(prefers-reduced-motion:reduce){.mqp.go{animation:none}}
+</style>
 </head><body>
 <svg width="0" height="0" style="position:absolute"><defs><symbol id="wm" viewBox="0 0 1180 530"><path fill="currentColor" fill-rule="evenodd" d="M1086 160L1082 164L1058 203L1074 222L1094 250L1114 288L1122 314L1122 333L1119 344L1107 367L1091 387L1067 409L1040 428L1002 448L980 457L933 471L910 475L949 515L981 507L1013 495L1040 482L1069 464L1095 443L1113 424L1132 397L1141 378L1149 353L1153 327L1153 294L1146 257L1137 233L1120 202L1100 175ZM22 325L25 338L35 354L41 359L60 367L74 370L98 372L179 371L217 364L241 352L253 339L259 327L263 313L263 307L265 306L292 335L305 345L325 357L344 365L368 371L408 372L421 370L444 363L472 347L488 334L507 315L541 277L551 271L559 271L564 277L570 318L575 332L584 347L595 358L615 369L629 372L652 372L676 365L691 355L704 341L712 329L728 297L740 278L748 271L760 270L766 273L773 280L808 329L818 340L836 355L862 368L882 372L903 372L920 369L940 360L951 352L962 341L969 331L978 310L982 291L982 269L979 251L973 231L958 199L940 172L918 148L894 187L893 191L916 220L934 252L942 278L942 294L939 304L930 315L920 321L911 324L884 325L871 321L859 314L838 294L810 256L790 235L777 227L761 223L745 224L725 233L709 250L674 309L662 320L653 324L631 324L621 319L611 309L604 297L598 280L591 238L584 228L574 224L557 224L542 228L534 232L516 245L461 300L443 313L429 320L405 326L382 326L370 324L344 315L329 306L300 279L286 260L265 223L247 184L217 104L210 80L208 80L173 113L173 117L186 154L221 236L232 266L236 284L236 295L231 308L218 317L190 323L166 325L90 324L72 320L64 316L57 309L54 301L54 290L56 282L30 281L23 304ZM767 76L761 80L742 100L740 104L740 110L762 133L768 137L771 137L776 134L793 117L799 109L799 104L796 99L777 80L771 76ZM694 76L667 103L667 110L693 136L698 137L722 115L726 108L726 103L703 79L698 76ZM730 13L703 40L702 44L706 51L730 74L735 74L753 58L760 50L763 43L760 37L737 14Z"/></symbol></defs></svg>
 <canvas id="fx"></canvas><div id="cur"></div>
@@ -837,6 +854,42 @@ const rh=R.habits;R.habits=()=>{let h=rh();if(ht!="quit")return h;const o=ls("rs
 /* خدمات إيمانية */
 try{SVC.push("🕌 إيمان");const c=SVC.length-1;SVT.az=["أذكار بعد الصلاة",["أستغفر الله ثلاثاً، ثم: اللهم أنت السلام ومنك السلام، تباركت يا ذا الجلال والإكرام.","سبحان الله ٣٣، الحمد لله ٣٣، الله أكبر ٣٣.","تمام المئة: لا إله إلا الله وحده لا شريك له، له الملك وله الحمد وهو على كل شيء قدير.","آية الكرسي وسور الإخلاص والفلق والناس."]];SVT.nm=["آداب النوم والاستيقاظ",["الوضوء قبل النوم والنوم على الشق الأيمن.","نفض الفراش، وقراءة آية الكرسي والمعوذات.","عند النوم: باسمك اللهم أموت وأحيا.","عند الاستيقاظ: الحمد لله الذي أحيانا بعد ما أماتنا وإليه النشور."]];SVT.sn=["سنن يومية مهجورة",["السواك عند الوضوء وقبل الصلاة.","ركعتا الضحى.","السنن الرواتب: ١٢ ركعة في اليوم.","ركعتان بعد الوضوء.","صدقة يومية ولو صغيرة."]];SVT.ms=["آداب المسجد",["ادخل بالرِّجل اليمنى وقل دعاء دخول المسجد.","صلِّ تحية المسجد قبل الجلوس.","اجعل الموبايل صامتاً وحافظ على الهدوء.","سوّوا الصفوف وتراصّوا.","اخرج بالرِّجل اليسرى وقل دعاء الخروج."]];SV.push([c,"🤲","أذكار بعد الصلاة","كل يوم بعد الفرض","t:az"],[c,"🌙","آداب النوم","من الوضوء للاستيقاظ","t:nm"],[c,"🌿","سنن مهجورة","سنن صغيرة أجرها كبير","t:sn"],[c,"🕌","آداب المسجد","قبل ما تدخل وبعد ما تخرج","t:ms"])}catch(e){}
 const kb2=kbuild;kbuild=function(){kb2();KI.push({t:"القرآن الكريم",f:()=>location.hash="#quran"},{t:"اسمع القرآن بصوت الشيخ مصطفى إسماعيل",f:()=>location.hash="#quran"})};
+/* ===== mushaf pages (604) ===== */
+let mqD=null,mqE=0,mqp=0,mqi=0,mqq=0,mqa=0,mqx=0;const mqS=[],mqJ=[];let mqB="";
+SM.msz=SM.msz||26;SM.bms=SM.bms||[];
+const mqc=n=>Math.max(1,Math.min(604,+n||1));
+async function mqLoad(){if(mqD||mqE==2)return;mqE=2;try{let j=null;try{const c=await caches.open(QCT),h=await c.match(QTU);if(h)j=await h.json()}catch(e){}
+if(!j){const r=await fetch(QTU);if(!r.ok)throw 0;try{const c=await caches.open(QCT);await c.put(QTU,r.clone());localStorage.rs_qtx=1}catch(e){}j=await r.json()}
+const P=Array.from({length:604},()=>[]);mqB=j.data.surahs[0].ayahs[0].text.replace(/^\ufeff/,"").trim();const w0=mqB.split(" ")[0];
+j.data.surahs.forEach(s=>s.ayahs.forEach(a=>{let t=a.text.replace(/^\ufeff/,"");if(s.number!=1&&s.number!=9&&a.numberInSurah==1){const w=t.split(" ");if(w[0]==w0&&w.length>4)t=w.slice(4).join(" ")}P[a.page-1].push({s:s.number,i:a.numberInSurah,t,j:a.juz})}));
+P.forEach((p,i)=>p.forEach(a=>{if(a.i==1&&!mqS[a.s])mqS[a.s]=i+1;if(!mqJ[a.j])mqJ[a.j]=i+1}));mqD=P;mqE=1}catch(e){mqE=-1;mqD=null}
+if(qt=="read"&&vOf()=="quran")rr()}
+const mqSv=()=>{SM.pg=mqp;ss("rs_qm",SM)};
+A.mpg=v=>{qt="read";mqp=mqc(v);mqi=0;mqa=1;mqSv();rr();scrollTo(0,0)};
+A.mpn=()=>A.mpg(mqp+1);A.mpv=()=>A.mpg(mqp-1);
+A.mpj=()=>{const e=$("#mqn");if(e&&e.value)A.mpg(e.value)};
+A.mpt=()=>{mqi=!mqi;rr()};
+A.mpb=()=>{const i=SM.bms.indexOf(mqp);if(i<0){SM.bms.push(mqp);SM.bms.sort((a,b)=>a-b);ts("تم حفظ علامة الصفحة "+ad(mqp))}else{SM.bms.splice(i,1);ts("اتشالت العلامة")}ss("rs_qm",SM);rr()};
+A.mpd=v=>{SM.bms=SM.bms.filter(x=>x!=+v);ss("rs_qm",SM);rr()};
+A.mps=v=>{SM.msz=Math.max(18,Math.min(44,SM.msz+ +v));ss("rs_qm",SM);rr()};
+A.mpk=()=>{SM.nt=SM.nt?0:1;ss("rs_qm",SM);rr()};
+const qrd0=A.qrd;A.qrd=n=>{qt="read";mqq=+n;mqp=0;rr();scrollTo(0,0)};
+const mqLbl=p=>{const a=mqD&&mqD[p-1]&&mqD[p-1][0];return a?"سورة "+SN[a.s-1]:""};
+function mqView(){mqLoad();if(mqq&&mqD){mqp=mqS[mqq]||1;mqq=0}if(!mqp)mqp=mqc(SM.pg||1);
+if(!mqD)return mqE==-1?"<div class='card'><p class='empty'>محتاج إنترنت لأول مرة تفتح فيها المصحف. بعد كده بيتحفظ على جهازك وبيشتغل من غير نت.</p></div>":"<div class='card'><p class='empty'>جاري تحميل المصحف…</p></div>";
+SM.pg=mqp;ss("rs_qm",SM);const pg=mqD[mqp-1],f=pg[0],bk=SM.bms.includes(mqp),an=mqa;mqa=0;let h="",cs=0,op=0;
+pg.forEach(a=>{if(a.i==1){if(op){h+="</p>";op=0}h+=`<div class="msb">سورة ${SN[a.s-1]}</div>`+(a.s!=1&&a.s!=9?`<div class="mbs">${mqB}</div>`:"")}if(!op){h+='<p class="mqt">';op=1}h+=`<span class="ay">${a.t}<i>${ad(a.i)}</i></span> `});if(op)h+="</p>";
+const idx=mqi?`<div class="card mqi"><div class="fr"><input class="fx" id="mqn" type="number" min="1" max="604" inputmode="numeric" placeholder="رقم الصفحة (١–٦٠٤)"><button data-a="mpj">اذهب</button></div><div class="fr"><select class="fx" aria-label="السورة" onchange="if(this.value)A.mpg(this.value)"><option value="">اختار سورة…</option>${SN.map((n,i)=>`<option value="${mqS[i+1]}">${ad(i+1)}. ${n}</option>`).join("")}</select><select class="fx" aria-label="الجزء" onchange="if(this.value)A.mpg(this.value)"><option value="">اختار جزء…</option>${Array.from({length:30},(_,i)=>`<option value="${mqJ[i+1]}">الجزء ${ad(i+1)}</option>`).join("")}</select></div><h4>🔖 علاماتي</h4>${SM.bms.length?SM.bms.map(p=>`<div class="ti"><button class="o" data-a="mpg" data-v="${p}">صفحة ${ad(p)} · ${mqLbl(p)}</button><button class="o" data-a="mpd" data-v="${p}" aria-label="حذف العلامة">×</button></div>`).join(""):"<p class='mut'>اضغط على 🔖 فوق الصفحة عشان تحفظ علامة.</p>"}</div>`:"";
+return `<div class="mqw${SM.nt?" nt":""}" style="--qf:${SM.msz}px"><div class="mqbar"><button class="o" data-a="mpt" aria-label="الفهرس">📑 فهرس</button><button class="o" data-a="mpb" aria-label="علامة" aria-pressed="${bk}">${bk?"🔖 محفوظة":"🔖 علّم"}</button><span><button class="o" data-a="mps" data-v="-2" aria-label="تصغير الخط">A−</button> <button class="o" data-a="mps" data-v="2" aria-label="تكبير الخط">A+</button> <button class="o" data-a="mpk" aria-label="الوضع الليلي">${SM.nt?"☀️":"🌙"}</button></span></div>${idx}
+<div class="mqp${an?" go":""}" id="mqp">${bk?'<b class="rib" aria-hidden="true"></b>':""}<div class="mqh"><span>${mqLbl(mqp)}</span><span>الجزء ${ad(f.j)}</span></div>${h}<div class="mqn">${ad(mqp)}</div></div>
+<div class="mqnav"><button class="o" data-a="mpv" ${mqp<=1?"disabled":""}>→ السابقة</button><small class="mut">${ad(mqp)} / ${ad(604)}</small><button class="o" data-a="mpn" ${mqp>=604?"disabled":""}>التالية ←</button></div>
+<p class="mut mqs"><small>اسحب يمين للصفحة التالية ويسار للسابقة · نص المصحف من <a href="https://tanzil.net" target="_blank" rel="noopener">مشروع تنزيل (tanzil.net)</a>، منقول كما هو بدون تعديل · ترقيم الصفحات حسب مصحف المدينة النبوية · بيتحفظ للقراءة بدون نت.</small></p></div>`}
+const R0=R.quran;R.quran=()=>{if(qt=="read")return `<div class="w"><div class="hd"><h2>المصحف</h2><p>اقرأ صفحة صفحة، واحفظ علامتك وكمّل من حيث وقفت.</p></div>${tabs([["listen","🎧 كل السور"],["read","📖 المصحف"],["fav","⭐ المفضلة"]],qt,"qtab")}${mqView()}</div>`;
+let h=R0();h=h.replace(/<button class="o"[^>]*data-a="qrd"[^>]*>📑[^<]*<\/button>/,"").replace("📖 اقرأ","📖 المصحف");if(SM.pg)h=h.replace("▶ شغّل</button>",'▶ شغّل</button><button class="o" style="color:#fff;border-color:#fff8" data-a="mpg" data-v="'+SM.pg+'">📑 كمّل القراءة من صفحة '+ad(SM.pg)+"</button>");return h};
+document.addEventListener("touchstart",e=>{if(e.target.closest&&e.target.closest("#mqp")){const t=e.touches[0];mqx=[t.clientX,t.clientY]}else mqx=0},{passive:true});
+document.addEventListener("touchend",e=>{if(!mqx)return;const t=e.changedTouches[0],dx=t.clientX-mqx[0],dy=t.clientY-mqx[1];mqx=0;if(Math.abs(dx)>60&&Math.abs(dy)<Math.abs(dx)*.6){dx>0?A.mpn():A.mpv()}},{passive:true});
+document.addEventListener("keydown",e=>{if(qt!="read"||vOf()!="quran"||/INPUT|SELECT|TEXTAREA/.test(e.target.tagName))return;if(e.key=="ArrowLeft")A.mpn();else if(e.key=="ArrowRight")A.mpv()});
+
 })();
 
 
