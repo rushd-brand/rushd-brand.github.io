@@ -11,5 +11,5 @@
 {"id":"a1","type":"app","icon":"✅","title":"ابني أول عادة","desc":"ابدأ صغير وكمّل.","hash":"#habits","cta":"افتح العادات"},
 {"id":"a2","type":"app","icon":"📖","title":"ورد القرآن","desc":"اسمع أو اقرأ، وحمّل للأوفلاين.","hash":"#quran","cta":"افتح القرآن"}]},
 {"id":"more","title":"تابعنا","items":[
-{"id":"inv","type":"share","icon":"🤝","title":"ابعت رشد لصاحبك","desc":"لو التطبيق فادك، ابعته لحد يستاهل يبدأ.","url":"https://wa.me/?text=%D8%B1%D8%B4%D8%AF%20%D8%B1%D9%81%D9%8A%D9%82%D9%83%20%D8%B9%D9%84%D9%89%20%D9%85%D9%87%D9%84%3A%20https%3A%2F%2Frushd-brand.github.io%2Fgift%2F","cta":"ابعت على واتساب"},
+{"id":"inv","type":"share","icon":"🤝","title":"ابعت رشد لصاحبك","desc":"لو التطبيق فادك، ابعته لحد يستاهل يبدأ.","hash":"#ow","cta":"افتح الدايرة"},
 {"id":"ch","type":"channel","icon":"▶️","title":"قناة رشد على يوتيوب","desc":"فيديوهات جديدة بتنزل باستمرار وهتظهر هنا.","url":"https://www.youtube.com/@RushdBrand","cta":"افتح القناة"}]}]}

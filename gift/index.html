@@ -349,6 +349,7 @@ const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const dk=(o=0)=>{const d=new Date(Date.now()-o*864e5);return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0")};
 const AR=s=>String(s).replace(/[٠-٩]/g,d=>"٠١٢٣٤٥٦٧٨٩".indexOf(d));
+try{const _r=new URLSearchParams(location.search).get("ref");if(/^A-[A-Z0-9]{10}$/.test(_r||""))localStorage.rs_ref=_r}catch(e){}
 let D={},S=null;try{D=JSON.parse(localStorage.rs_data||"{}")}catch(e){}try{S=JSON.parse(localStorage.rs_s||"null")}catch(e){}
 const g=(k,d)=>D[k]===undefined?d:D[k];
 let syncT;
@@ -407,7 +408,7 @@ const gsh=id=>{["ga1","ga2","ga3","gleg"].forEach(x=>$("#"+x).hidden=x!=id);gerr
 const EMR=/^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const aerr=r=>r&&r.err=="wait"?"استنى "+r.wait+" ثانية وجرّب تاني.":r&&r.err=="slow-down"?"محاولات كتير، جرّب بعد شوية.":r&&r.err=="mail-failed"?"مش قادرين نبعت الإيميل دلوقتي، جرّب بعد شوية.":r&&r.err=="bad-email"?"الإيميل مش صحيح.":r&&r.err=="bad-code"?"الكود غلط.":r&&r.err=="expired"?"الكود خلص أو المحاولات انتهت. اطلب كود جديد.":r&&r.err=="disabled"?"الحساب ده موقوف حاليًا. كلّمنا على واتساب.":r&&r.err=="bad-phone"?"رقم الموبايل مش صحيح.":r&&r.err=="consent"?"لازم توافق عشان نحتفظ برقمك.":r&&r.err=="bad-legacy"?"كود النوتة غلط.":r&&r.err=="taken"?"كود النوتة ده مربوط بحساب تاني.":"مفيش اتصال، جرّب تاني.";
 async function aReq(){const em=$("#ae1").value.trim().toLowerCase();if(!EMR.test(em))return gerr("اكتب إيميل صحيح.");$("#ab1").disabled=true;const r=await api({t:"a_req",email:em});$("#ab1").disabled=false;if(r&&r.ok){AE=em;gsh("ga2");$("#am2").textContent="بعتنا كود من ٦ أرقام على "+em+". لو مش لاقيه شوف الـSpam.";$("#ae2").value="";$("#ae2").focus()}else gerr(aerr(r))}
-async function aVer(){const c=AR($("#ae2").value).replace(/\D/g,"");if(c.length!=6)return gerr("اكتب الكود (٦ أرقام).");$("#ab2").disabled=true;const r=await api({t:"a_verify",email:AE,code:c});$("#ab2").disabled=false;if(!(r&&r.ok))return gerr(aerr(r));AU=r.user;AT=r.token;if(!AU.name){gsh("ga3");$("#an").focus()}else aFin()}
+async function aVer(){const c=AR($("#ae2").value).replace(/\D/g,"");if(c.length!=6)return gerr("اكتب الكود (٦ أرقام).");$("#ab2").disabled=true;const r=await api({t:"a_verify",email:AE,code:c,ref:localStorage.rs_ref||""});$("#ab2").disabled=false;if(!(r&&r.ok))return gerr(aerr(r));AU=r.user;AT=r.token;if(!AU.name){gsh("ga3");$("#an").focus()}else aFin()}
 async function aProf(){const n=$("#an").value.trim(),p=$("#ap").value.trim(),l=$("#al").value.trim().toUpperCase().replace(/\s/g,"");if(!n)return gerr("اكتب اسمك.");if(p&&!$("#ac1").checked)return gerr("علّم على الموافقة عشان نحتفظ برقمك، أو امسح الرقم.");$("#ab3").disabled=true;let b={t:"a_upd",token:AT,name:n,ann:$("#ac2").checked&&!!p?1:0};if(p){b.phone=AR(p);b.consent=1}else b.phone="";const r=await api(b);if(!(r&&r.ok)){$("#ab3").disabled=false;return gerr(aerr(r))}AU=r.user;if(l){const x=await api({t:"a_link",token:AT,legacy:l});if(x&&x.ok)AU=x.user;else{$("#ab3").disabled=false;return gerr(aerr(x))}}$("#ab3").disabled=false;aFin()}
 async function aFin(){const u=AU,tk=AT;if(D._c&&D._c!=u.dkey){D={};localStorage.removeItem("rs_data");localStorage.removeItem("rs_pic")}D._c=u.dkey;localStorage.rs_data=JSON.stringify(D);let rd=null;try{const r=await api({t:"load",code:u.dkey,token:tk});if(r&&r.err=="auth")return gerr("مشكلة في الجلسة، جرّب تاني.");if(r&&r.ok&&r.data)rd=JSON.parse(r.data)}catch(e){}if(rd&&(!D.joined||(rd._t||0)>(D._t||0))){D=rd;D._c=u.dkey;if(D.pic)localStorage.rs_pic=D.pic}D._nm=u.name||D._nm||"";localStorage.rs_data=JSON.stringify(D);const first=!D.joined;S={code:u.dkey,token:tk,name:u.name||D._nm||"صاحبي",acct:1,em:u.email};localStorage.rs_s=JSON.stringify(S);if(first)sv("joined",dk());history.replaceState(null,"",location.pathname+location.hash);openApp(first)}
 $("#ab1").onclick=aReq;$("#ab2").onclick=aVer;$("#ab3").onclick=aProf;
@@ -839,7 +840,7 @@ const JD0={"v":1,"title":"رحلتك مع رشد","groups":[
 {"id":"a1","type":"app","icon":"✅","title":"ابني أول عادة","desc":"ابدأ صغير وكمّل.","hash":"#habits","cta":"افتح العادات"},
 {"id":"a2","type":"app","icon":"📖","title":"ورد القرآن","desc":"اسمع أو اقرأ، وحمّل للأوفلاين.","hash":"#quran","cta":"افتح القرآن"}]},
 {"id":"more","title":"تابعنا","items":[
-{"id":"inv","type":"share","icon":"🤝","title":"ابعت رشد لصاحبك","desc":"لو التطبيق فادك، ابعته لحد يستاهل يبدأ.","url":"https://wa.me/?text=%D8%B1%D8%B4%D8%AF%20%D8%B1%D9%81%D9%8A%D9%82%D9%83%20%D8%B9%D9%84%D9%89%20%D9%85%D9%87%D9%84%3A%20https%3A%2F%2Frushd-brand.github.io%2Fgift%2F","cta":"ابعت على واتساب"},
+{"id":"inv","type":"share","icon":"🤝","title":"ابعت رشد لصاحبك","desc":"لو التطبيق فادك، ابعته لحد يستاهل يبدأ.","hash":"#ow","cta":"افتح الدايرة"},
 {"id":"ch","type":"channel","icon":"▶️","title":"قناة رشد على يوتيوب","desc":"فيديوهات جديدة بتنزل باستمرار وهتظهر هنا.","url":"https://www.youtube.com/@RushdBrand","cta":"افتح القناة"}]}]};
 let JD=JD0;try{const c=JSON.parse(localStorage.rs_jd||"null");if(c&&c.v)JD=c}catch(e){}
 (async()=>{try{const r=await fetch("journey.json?"+Math.floor(Date.now()/36e5),{cache:"no-cache"});if(r.ok){const j=await r.json();if(j&&j.groups){JD=j;localStorage.rs_jd=JSON.stringify(j);if(cur=="journey")rr()}}}catch(e){}})();
@@ -873,6 +874,24 @@ try{if(navigator.canShare&&navigator.canShare({files:[f]})){await navigator.shar
 const u=URL.createObjectURL(b),a=document.createElement("a");a.href=u;a.download="rushd-progress.png";a.click();setTimeout(()=>URL.revokeObjectURL(u),4000);ts("اتحفظت صورة تقدمك")}
 A.shc=()=>{shareCard().catch(()=>ts("مقدرناش نعمل الصورة"))};
 const _hs=R.home;R.home=()=>{const h=_hs(),i=h.lastIndexOf("</div>");return h.slice(0,i)+`<div class="card" style="margin-top:16px"><h3>📤 شارك تقدمك</h3><p class="mut">صورة بتقدمك (الستريك والنقط والمستوى) تبعتها لصاحبك.</p><button data-a="shc">اعمل كارت المشاركة</button></div>`+h.slice(i)};
+/* owners circle: invite + community */
+const owU="https://rushd-brand.github.io/gift/";let OWS=null;
+async function owLoad(){if(!S||!S.acct||!S.token)return;try{const r=await api({t:"a_stats",token:S.token});if(r&&r.ok){OWS=r;if(cur=="ow")rr()}}catch(e){}}
+V.push("ow");$("#app").insertAdjacentHTML("beforeend",'<section class="v" id="v-ow"></section>');
+$("#nv").insertAdjacentHTML("beforeend",'<a href="#ow" data-v="ow">أصحاب النوتة</a>');$("#tb").insertAdjacentHTML("beforeend",'<a href="#ow" data-v="ow"><b>🤝</b>الدايرة</a>');
+const owLink=()=>OWS?owU+"?ref="+OWS.code:owU;
+const owMsg=()=>"أنا بستخدم رشد مع نوتتي، رفيقك على مهل. جرّبه: "+owLink();
+A.owsh=async()=>{const m=owMsg();try{if(navigator.share){await navigator.share({text:m});return}}catch(e){if(e&&e.name=="AbortError")return}window.open("https://wa.me/?text="+encodeURIComponent(m),"_blank","noopener")};
+A.owcp=async()=>{try{await navigator.clipboard.writeText(owLink());ts("اتنسخ اللينك")}catch(e){ts("انسخه من هنا: "+owLink())}};
+R.ow=()=>{const acct=S&&S.acct,n=OWS?OWS.refs:0,tiers=[[1,"أول دعوة"],[3,"٣ أصحاب"],[5,"٥ أصحاب"],[10,"١٠ أصحاب"]];
+if(!acct)return `<div class="w"><div class="hd"><h2>🤝 أصحاب النوتة</h2><p>دايرة صغيرة من الناس اللي بتكمّل مع رشد.</p></div><div class="card"><p>سجّل دخولك بإيميلك عشان يبقى ليك كود دعوة خاص بيك.</p></div></div>`;
+return `<div class="w"><div class="hd"><h2>🤝 أصحاب النوتة</h2><p>دايرة صغيرة من الناس اللي بتكمّل مع رشد.</p></div>
+<div class="card hero"><small>أصحاب النوتة هنا</small><div class="big" style="color:#fff">${OWS?OWS.owners:"…"}</div><p class="mut">حساب نشط بيستخدم رشد. رقم إجمالي بس، من غير أسماء.</p></div>
+<div class="card"><h3>ادعو صاحب</h3><p class="mut">لو رشد فادك، ابعته لحد من اللي حواليك. لينك الدعوة الخاص بيك:</p><p dir="ltr" style="word-break:break-all;font-size:13px">${OWS?esc(owLink()):"..."}</p><div class="fr"><button data-a="owsh">ابعت لصاحبك</button><button class="o" data-a="owcp">انسخ اللينك</button></div></div>
+<div class="card"><h3>اللي دخلوا بدعوتك: ${n}</h3><div class="dots7">${tiers.map(t=>`<i style="${n>=t[0]?"background:#7D5A44;border-color:#7D5A44":""}"></i>`).join("")}</div><p class="mut">${tiers.map(t=>(n>=t[0]?"✓ ":"")+t[1]).join(" • ")}</p></div></div>`};
+const _ho=R.home;R.home=()=>{const h=_ho(),i=h.lastIndexOf("</div>");return h.slice(0,i)+`<div class="card" style="margin-top:16px"><h3>🤝 أصحاب النوتة</h3><p class="mut">ادعو صاحب وشوف مين دخل بدعوتك.</p><a href="#ow"><button>افتح الدايرة</button></a></div>`+h.slice(i)};
+const _ko=kbuild;kbuild=function(){_ko();KI.push({t:"أصحاب النوتة والدعوات",f:()=>location.hash="#ow"})};
+const _oo=openApp;openApp=function(f){_oo(f);owLoad()};
 function boot(){if(S){openApp(false);bg()}}
 if(sessionStorage.getItem("rspl")){sp.remove();boot()}else{sessionStorage.setItem("rspl",1);setTimeout(()=>sp.classList.add("out"),1900);setTimeout(()=>{sp.remove()},2800);boot()}
 
