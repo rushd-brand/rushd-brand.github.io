@@ -1,4 +1,4 @@
-const CACHE = "rushd-gift-v28";
+const CACHE = "rushd-gift-v29";
 const QT = "rushd-quran-text";
 const QTU = "https://api.alquran.cloud/v1/quran/quran-uthmani";
 const ASSETS = ["./", "index.html", "manifest.webmanifest", "privacy.html", "journey.json", "a/9ad38d9743.otf", "a/dafbd0eb5b.ttf", "a/cfc62f6d46.webp", "a/51a5c835dd.webp", "a/1db58be49c.webp", "icon-180.png", "badge-96.png", "icon-192.png", "icon-512.png", "icon-maskable-192.png", "icon-maskable-512.png", "favicon.ico"];
