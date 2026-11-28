@@ -1,5 +1,5 @@
-const CACHE = "rushd-gift-v5";
-const ASSETS = ["./", "index.html", "manifest.webmanifest", "icon-180.png", "icon-192.png", "icon-512.png", "icon-maskable-192.png", "icon-maskable-512.png"];
+const CACHE = "rushd-gift-v6";
+const ASSETS = ["./", "index.html", "manifest.webmanifest", "icon-180.png", "badge-96.png", "icon-192.png", "icon-512.png", "icon-maskable-192.png", "icon-maskable-512.png"];
 self.addEventListener("install", function (e) {
   e.waitUntil(caches.open(CACHE).then(function (c) { return c.addAll(ASSETS); }).then(function () { return self.skipWaiting(); }));
 });
@@ -27,7 +27,7 @@ self.addEventListener("push", function (e) {
   var d = {};
   try { d = e.data ? e.data.json() : {}; } catch (x) {}
   e.waitUntil(Promise.all([
-    self.registration.showNotification(d.title || "رشد", { body: d.body || "عندك حاجات مستنيةك النهارده", icon: "icon-192.png", badge: "icon-192.png", dir: "rtl", lang: "ar", data: { url: d.url || "/gift/" } }),
+    self.registration.showNotification(d.title || "رشد", { body: d.body || "عندك حاجات مستنيةك النهارده", icon: "icon-512.png", badge: "badge-96.png", vibrate: [180, 90, 180, 90, 420], tag: "rushd-daily", renotify: true, silent: false, timestamp: Date.now(), dir: "rtl", lang: "ar", data: { url: d.url || "/gift/" } }),
     clients.matchAll({ type: "window", includeUncontrolled: true }).then(function (cs) { cs.forEach(function (c) { c.postMessage({ type: "pushgot", body: d.body || "" }); }); })
   ]));
 });
