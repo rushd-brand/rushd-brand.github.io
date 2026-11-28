@@ -228,7 +228,25 @@ button .ic,.btn .ic{vertical-align:-.2em}
 @media(max-width:360px){#tb a,#tb button.tbm{font-size:11.5px}#hd .lg{width:54px}.pipe{grid-template-columns:1fr}}
 @media(max-width:820px) and (display-mode:standalone){#hd{padding-top:calc(10px + env(safe-area-inset-top,0px))}}
 .gl{font-size:14px;margin:12px 0 0}.gl a{color:var(--c4);text-decoration:underline}.gck{display:flex;gap:8px;align-items:flex-start;text-align:right;font-size:13px;margin:8px 0;color:var(--c4);line-height:1.6}.gck input{margin-top:5px;flex:none}#gate .fx:focus{outline:2px solid var(--c4);outline-offset:1px}
-</style></head><body>
+</style><style id="mo">
+@keyframes tk{0%{transform:scale(.6)}55%{transform:scale(1.22)}100%{transform:scale(1)}}
+@keyframes tkr{from{box-shadow:0 0 0 0 #7D5A4488}to{box-shadow:0 0 0 12px #7D5A4400}}
+@keyframes pie{from{transform:scale(.7) rotate(-90deg);opacity:0}}
+@keyframes bar{from{transform:scaleY(0)}}
+@keyframes fl2{from{opacity:0;transform:translateY(8px)}}
+.hc{transition:background .2s,border-color .2s,transform .15s}
+.hc:active:not(:disabled){transform:scale(.88)}
+.hc.pp{animation:tk .35s cubic-bezier(.2,1.4,.4,1),tkr .5s ease-out}
+.hm-pie{animation:pie .7s cubic-bezier(.2,.8,.2,1) both}
+.hm-pie b{animation:pop .5s .3s both}
+.hm-bars i,.bars i{transform-origin:bottom;animation:bar .6s .15s cubic-bezier(.2,.8,.2,1) both}
+.card.stat b{display:inline-block;animation:pop .5s .1s both}
+.card,.o,.tab,button{transition:transform .18s ease,box-shadow .2s ease,background-color .2s ease}
+@media(hover:hover){.card:hover{transform:translateY(-2px)}}
+.xp i{transition:width .8s cubic-bezier(.2,.8,.2,1)}
+@media(prefers-reduced-motion:reduce){.hc.pp,.hm-pie,.hm-pie b,.hm-bars i,.bars i,.card.stat b{animation:none!important}.card:hover{transform:none}}
+</style>
+</head><body>
 <svg width="0" height="0" style="position:absolute"><defs><symbol id="wm" viewBox="0 0 1180 530"><path fill="currentColor" fill-rule="evenodd" d="M1086 160L1082 164L1058 203L1074 222L1094 250L1114 288L1122 314L1122 333L1119 344L1107 367L1091 387L1067 409L1040 428L1002 448L980 457L933 471L910 475L949 515L981 507L1013 495L1040 482L1069 464L1095 443L1113 424L1132 397L1141 378L1149 353L1153 327L1153 294L1146 257L1137 233L1120 202L1100 175ZM22 325L25 338L35 354L41 359L60 367L74 370L98 372L179 371L217 364L241 352L253 339L259 327L263 313L263 307L265 306L292 335L305 345L325 357L344 365L368 371L408 372L421 370L444 363L472 347L488 334L507 315L541 277L551 271L559 271L564 277L570 318L575 332L584 347L595 358L615 369L629 372L652 372L676 365L691 355L704 341L712 329L728 297L740 278L748 271L760 270L766 273L773 280L808 329L818 340L836 355L862 368L882 372L903 372L920 369L940 360L951 352L962 341L969 331L978 310L982 291L982 269L979 251L973 231L958 199L940 172L918 148L894 187L893 191L916 220L934 252L942 278L942 294L939 304L930 315L920 321L911 324L884 325L871 321L859 314L838 294L810 256L790 235L777 227L761 223L745 224L725 233L709 250L674 309L662 320L653 324L631 324L621 319L611 309L604 297L598 280L591 238L584 228L574 224L557 224L542 228L534 232L516 245L461 300L443 313L429 320L405 326L382 326L370 324L344 315L329 306L300 279L286 260L265 223L247 184L217 104L210 80L208 80L173 113L173 117L186 154L221 236L232 266L236 284L236 295L231 308L218 317L190 323L166 325L90 324L72 320L64 316L57 309L54 301L54 290L56 282L30 281L23 304ZM767 76L761 80L742 100L740 104L740 110L762 133L768 137L771 137L776 134L793 117L799 109L799 104L796 99L777 80L771 76ZM694 76L667 103L667 110L693 136L698 137L722 115L726 108L726 103L703 79L698 76ZM730 13L703 40L702 44L706 51L730 74L735 74L753 58L760 50L763 43L760 37L737 14Z"/></symbol></defs></svg>
 <canvas id="fx"></canvas><div id="cur"></div>
 <div id="spl"><svg viewBox="0 0 1180 530"><use href="#wm"/></svg><p>على مهلٍ.. تُبنى الأشياء التي تدوم</p><i></i></div><div id="wp2"><svg viewBox="0 0 1180 530"><use href="#wm"/></svg></div>
@@ -1089,4 +1107,5 @@ function mw(){const mr=document.getElementById("mr"),mb=document.getElementById(
  addEventListener("hashchange",()=>{mr.hidden=true;sync()});setInterval(sync,600);sync()}
 if(document.readyState!="loading")mw();else document.addEventListener("DOMContentLoaded",mw);
 })();
-</script></body></html>
+</script><script>try{const _h=A.hmt;A.hmt=function(v){const r=_h.apply(this,arguments);const b=document.querySelector('[data-a="hmt"][data-v="'+v+'"]');if(b&&b.classList.contains("on"))b.classList.add("pp");return r}}catch(e){}</script>
+</body></html>
