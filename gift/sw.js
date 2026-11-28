@@ -1,11 +1,11 @@
-const CACHE = "rushd-gift-v9";
+const CACHE = "rushd-gift-v10";
 const ASSETS = ["./", "index.html", "manifest.webmanifest", "privacy.html", "journey.json", "icon-180.png", "badge-96.png", "icon-192.png", "icon-512.png", "icon-maskable-192.png", "icon-maskable-512.png"];
 self.addEventListener("install", function (e) {
   e.waitUntil(caches.open(CACHE).then(function (c) { return c.addAll(ASSETS); }).then(function () { return self.skipWaiting(); }));
 });
 self.addEventListener("activate", function (e) {
   e.waitUntil(caches.keys().then(function (keys) {
-    return Promise.all(keys.filter(function (k) { return k !== CACHE; }).map(function (k) { return caches.delete(k); }));
+    return Promise.all(keys.filter(function (k) { return k.indexOf("rushd-gift-") === 0 && k !== CACHE; }).map(function (k) { return caches.delete(k); }));
   }).then(function () { return self.clients.claim(); }));
 });
 self.addEventListener("fetch", function (e) {
@@ -28,6 +28,7 @@ self.addEventListener("push", function (e) {
   var d = {};
   try { d = e.data ? e.data.json() : {}; } catch (x) {}
   e.waitUntil(Promise.all([
+    caches.open("rushd-nf").then(function (c) { return c.put("/gift/_nf/" + Date.now(), new Response(JSON.stringify({ t: d.title || "رشد", b: d.body || "", ts: Date.now() }))); }).catch(function () {}),
     self.registration.showNotification(d.title || "رشد", { body: d.body || "عندك حاجات مستنيةك النهارده", icon: "icon-512.png", badge: "badge-96.png", vibrate: [180, 90, 180, 90, 420], tag: "rushd-daily", renotify: true, silent: false, timestamp: Date.now(), dir: "rtl", lang: "ar", data: { url: d.url || "/gift/" } }),
     clients.matchAll({ type: "window", includeUncontrolled: true }).then(function (cs) { cs.forEach(function (c) { c.postMessage({ type: "pushgot", body: d.body || "" }); }); })
   ]));

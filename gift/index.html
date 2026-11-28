@@ -849,6 +849,29 @@ A.jo=(id,t)=>{const it=jAll().find(x=>x.id==id);if(!it)return;const d=jDone();if
 R.journey=()=>{const all=jAll(),d=jDone(),n=all.filter(x=>d.includes(x.id)).length,p=all.length?Math.round(n/all.length*100):0;return `<div class="w"><div class="hd"><h2>${esc(JD.title||"رحلتك مع رشد")}</h2><p>النوتة والفيديوهات والتطبيق في مكان واحد. كمّل خطوة خطوة.</p></div><div class="card hero"><small>تقدمك</small><h3>${n} من ${all.length} خطوة</h3><div class="xp"><i style="width:${p}%"></i></div></div>${JD.groups.map(gr=>`<h3 class="sec">${esc(gr.title)}</h3><div class="grid">${gr.items.map(it=>`<div class="card"><h3>${it.icon||""} ${esc(it.title)} ${d.includes(it.id)?"✓":""}</h3><p class="mut">${esc(it.desc||"")}</p><button${d.includes(it.id)?' class="o"':""} data-a="jo" data-v="${esc(it.id)}">${esc(it.cta||"افتح")}</button></div>`).join("")}</div>`).join("")}</div>`};
 const _hj=R.home;R.home=()=>{const h=_hj(),i=h.lastIndexOf("</div>"),all=jAll(),n=all.filter(x=>jDone().includes(x.id)).length;return h.slice(0,i)+`<div class="card" style="margin-top:16px"><h3>🧭 رحلتك مع رشد</h3><p class="mut">${n} من ${all.length} خطوة. النوتة، الفيديوهات، والتطبيق.</p><a href="#journey"><button>كمّل الرحلة</button></a></div>`+h.slice(i)};
 const _kj=kbuild;kbuild=function(){_kj();KI.push({t:"رحلتك مع رشد",f:()=>location.hash="#journey"})};
+
+/* notification center */
+const nfL=()=>g("nf",[]);
+function nfAdd(t,b,ts){const L=nfL();if(L.some(x=>x.b==b&&Math.abs(x.ts-(ts||Date.now()))<6e4))return;L.unshift({t:t||"رشد",b:b||"",ts:ts||Date.now(),r:0});sv("nf",L.slice(0,50));nfBadge()}
+async function nfImport(){try{const c=await caches.open("rushd-nf"),ks=await c.keys();for(const k of ks){const r=await c.match(k);if(r){const j=await r.json();nfAdd(j.t,j.b,j.ts)}await c.delete(k)}}catch(e){}}
+function nfBadge(){const n=nfL().filter(x=>!x.r).length;let a=$("#hbell");if(!a){a=document.createElement("a");a.id="hbell";a.href="#inbox";a.className="av";a.setAttribute("aria-label","الإشعارات");a.style.cssText="position:relative;margin-inline-start:6px;display:grid;place-items:center;font-size:17px";$("#hd").appendChild(a)}a.innerHTML="🔔"+(n?`<b style="position:absolute;top:-4px;inset-inline-end:-4px;background:#b3261e;color:#fff;border-radius:10px;font-size:11px;padding:0 5px;line-height:16px">${n}</b>`:"")}
+V.push("inbox");$("#app").insertAdjacentHTML("beforeend",'<section class="v" id="v-inbox"></section>');
+R.inbox=()=>{const L=nfL();return `<div class="w"><div class="hd"><h2>الإشعارات</h2><p>آخر رسائل رشد ليك.</p></div>${L.length?L.map(x=>`<div class="card"><h3>${esc(x.t)}</h3><p>${esc(x.b)}</p><small class="mut">${new Date(x.ts).toLocaleString("ar-EG",{day:"numeric",month:"short",hour:"numeric",minute:"2-digit"})}</small></div>`).join("")+`<div class="fr"><button class="o" data-a="nfc">امسح الكل</button></div>`:"<p class='empty'>مفيش إشعارات لسه. هتلاقي هنا أي رسالة من رشد.</p>"}</div>`};
+R.after_inbox=()=>{const L=nfL();if(L.some(x=>!x.r)){L.forEach(x=>x.r=1);sv("nf",L);nfBadge()}};
+A.nfc=()=>{sv("nf",[]);nfBadge();rr()};
+if("serviceWorker"in navigator)navigator.serviceWorker.addEventListener("message",e=>{if(e.data&&e.data.type=="pushgot")nfAdd("رشد",e.data.body)});
+const _ob=openApp;openApp=function(f){_ob(f);nfImport().then(()=>{if(f&&!nfL().length)nfAdd("أهلاً بيك في رشد","دي صفحة الإشعارات. هتلاقي هنا أي رسالة من رشد.");nfBadge()})};
+/* share card */
+async function shareCard(){const c=document.createElement("canvas");c.width=1080;c.height=1350;const x=c.getContext("2d");const gr=x.createLinearGradient(0,0,1080,1350);gr.addColorStop(0,"#7D5A44");gr.addColorStop(1,"#2E1F18");x.fillStyle=gr;x.fillRect(0,0,1080,1350);x.strokeStyle="#D7C9B8";x.globalAlpha=.35;x.lineWidth=3;x.strokeRect(50,50,980,1250);x.globalAlpha=1;x.direction="rtl";x.textAlign="center";x.fillStyle="#D7C9B8";try{await document.fonts.ready}catch(e){}
+x.font="bold 120px Tajawal, TajB, sans-serif";x.fillText("رشد",540,260);x.font="44px Tajawal, TajB, sans-serif";x.fillStyle="#EDE4D8";x.fillText("على مهلٍ.. تُبنى الأشياء التي تدوم",540,340);
+const L=lv(),st=[["🔥 "+streak(),"يوم ورا بعض"],["⭐ "+XPv(),"نقطة"],["المستوى "+(L.l+1),L.nm]];x.fillStyle="#fff";x.font="bold 76px Tajawal, TajB, sans-serif";x.fillText(S.name,540,560);
+st.forEach((a,i)=>{const cx=240+i*300;x.fillStyle="#ffffff18";x.fillRect(cx-130,680,260,230);x.fillStyle="#fff";x.font="bold 60px Tajawal, TajB, sans-serif";x.fillText(a[0],cx,780);x.fillStyle="#D7C9B8";x.font="34px Tajawal, TajB, sans-serif";x.fillText(a[1],cx,850)});
+x.fillStyle="#EDE4D8";x.font="40px Tajawal, TajB, sans-serif";x.fillText("بنبني عادة صغيرة كل يوم",540,1050);x.fillStyle="#D7C9B8";x.font="36px Tajawal, TajB, sans-serif";x.fillText("rushd-brand.github.io",540,1220);
+const b=await new Promise(r=>c.toBlob(r,"image/png")),f=new File([b],"rushd-progress.png",{type:"image/png"});
+try{if(navigator.canShare&&navigator.canShare({files:[f]})){await navigator.share({files:[f],text:"تقدمي في رشد"});return}}catch(e){if(e&&e.name=="AbortError")return}
+const u=URL.createObjectURL(b),a=document.createElement("a");a.href=u;a.download="rushd-progress.png";a.click();setTimeout(()=>URL.revokeObjectURL(u),4000);ts("اتحفظت صورة تقدمك")}
+A.shc=()=>{shareCard().catch(()=>ts("مقدرناش نعمل الصورة"))};
+const _hs=R.home;R.home=()=>{const h=_hs(),i=h.lastIndexOf("</div>");return h.slice(0,i)+`<div class="card" style="margin-top:16px"><h3>📤 شارك تقدمك</h3><p class="mut">صورة بتقدمك (الستريك والنقط والمستوى) تبعتها لصاحبك.</p><button data-a="shc">اعمل كارت المشاركة</button></div>`+h.slice(i)};
 function boot(){if(S){openApp(false);bg()}}
 if(sessionStorage.getItem("rspl")){sp.remove();boot()}else{sessionStorage.setItem("rspl",1);setTimeout(()=>sp.classList.add("out"),1900);setTimeout(()=>{sp.remove()},2800);boot()}
 
