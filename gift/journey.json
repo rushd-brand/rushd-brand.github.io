@@ -1,0 +1,14 @@
+{"v":1,"title":"رحلتك مع رشد","groups":[
+{"id":"start","title":"ابدأ من هنا","items":[
+{"id":"nb","type":"notebook","icon":"📓","title":"نوتة رشد","desc":"النوتة لسه مش للبيع. سجّل في قائمة الانتظار وهنبلّغك أول ما تنزل.","url":"https://rushd-brand.github.io","cta":"قائمة الانتظار"},
+{"id":"long","type":"video","icon":"🎬","title":"الفيديو الأساسي","desc":"الفكرة ورا رشد وإزاي تبدأ.","url":"https://youtu.be/mwRZgjJMJbk","cta":"شاهد على يوتيوب"}]},
+{"id":"shorts","title":"فيديوهات قصيرة","items":[
+{"id":"t1","type":"short","icon":"⚡","title":"فيديو قصير ١","desc":"دقيقة تفرق.","url":"https://youtube.com/shorts/nwZ2hKN7uXo","cta":"شاهد"},
+{"id":"t2","type":"short","icon":"⚡","title":"فيديو قصير ٢","desc":"دقيقة تفرق.","url":"https://youtube.com/shorts/-CV_Jdi-174","cta":"شاهد"},
+{"id":"t3","type":"short","icon":"⚡","title":"فيديو قصير ٣","desc":"دقيقة تفرق.","url":"https://youtube.com/shorts/UMAKJLqmuvU","cta":"شاهد"},
+{"id":"t4","type":"short","icon":"⚡","title":"فيديو قصير ٤","desc":"دقيقة تفرق.","url":"https://youtube.com/shorts/obhpPCxm8qo","cta":"شاهد"}]},
+{"id":"app","title":"طبّق جوه التطبيق","items":[
+{"id":"a1","type":"app","icon":"✅","title":"ابني أول عادة","desc":"ابدأ صغير وكمّل.","hash":"#habits","cta":"افتح العادات"},
+{"id":"a2","type":"app","icon":"📖","title":"ورد القرآن","desc":"اسمع أو اقرأ، وحمّل للأوفلاين.","hash":"#quran","cta":"افتح القرآن"}]},
+{"id":"more","title":"تابعنا","items":[
+{"id":"ch","type":"channel","icon":"▶️","title":"قناة رشد على يوتيوب","desc":"فيديوهات جديدة بتنزل باستمرار وهتظهر هنا.","url":"https://www.youtube.com/@RushdBrand","cta":"افتح القناة"}]}]}

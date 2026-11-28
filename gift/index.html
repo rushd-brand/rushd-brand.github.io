@@ -824,6 +824,31 @@ const kb2=kbuild;kbuild=function(){kb2();KI.push({t:"القرآن الكريم",
 /* account card in profile */
 A.adel=async()=>{if(!S.acct)return;if(!confirm("تمسح حسابك وكل بياناتك نهائيًا؟ مفيش رجوع."))return;if(!confirm("متأكد؟ هيتمسح الإيميل والتقدم والعادات كلها."))return;const r=await api({t:"a_erase",token:S.token});if(r&&r.ok){S=null;["rs_data","rs_pic","rs_s"].forEach(k=>localStorage.removeItem(k));ts("اتمسح حسابك");setTimeout(()=>{location.hash="";location.reload()},900)}else ts("مقدرناش نمسح دلوقتي، جرّب تاني")};
 const _me4=R.me;R.me=()=>{const h=_me4(),i=h.lastIndexOf("</div>");return h.slice(0,i)+`<div class="card" style="margin-top:16px"><h3>🔐 حسابك</h3>${S.acct?`<p class="mut">داخل بإيميل: <b dir="ltr">${esc(S.em||"")}</b></p>`:`<p class="mut">داخل بكود النوتة. ادخل بإيميلك من شاشة الدخول لو عايز حساب بإيميل.</p>`}<div class="fr"><button class="o" data-a="logout">تسجيل خروج</button>${S.acct?`<button class="o" data-a="adel" style="color:#b3261e;border-color:#b3261e">امسح حسابي نهائيًا</button>`:""}</div><p class="mut"><small><a href="privacy.html" target="_blank" rel="noopener">سياسة الخصوصية والشروط</a> · <a href="https://wa.me/201101090427" target="_blank" rel="noopener">تواصل معنا</a></small></p></div>`+h.slice(i)};
+
+/* journey: notebook + videos + app (data in journey.json, easy to extend) */
+const JD0={"v":1,"title":"رحلتك مع رشد","groups":[
+{"id":"start","title":"ابدأ من هنا","items":[
+{"id":"nb","type":"notebook","icon":"📓","title":"نوتة رشد","desc":"النوتة لسه مش للبيع. سجّل في قائمة الانتظار وهنبلّغك أول ما تنزل.","url":"https://rushd-brand.github.io","cta":"قائمة الانتظار"},
+{"id":"long","type":"video","icon":"🎬","title":"الفيديو الأساسي","desc":"الفكرة ورا رشد وإزاي تبدأ.","url":"https://youtu.be/mwRZgjJMJbk","cta":"شاهد على يوتيوب"}]},
+{"id":"shorts","title":"فيديوهات قصيرة","items":[
+{"id":"t1","type":"short","icon":"⚡","title":"فيديو قصير ١","desc":"دقيقة تفرق.","url":"https://youtube.com/shorts/nwZ2hKN7uXo","cta":"شاهد"},
+{"id":"t2","type":"short","icon":"⚡","title":"فيديو قصير ٢","desc":"دقيقة تفرق.","url":"https://youtube.com/shorts/-CV_Jdi-174","cta":"شاهد"},
+{"id":"t3","type":"short","icon":"⚡","title":"فيديو قصير ٣","desc":"دقيقة تفرق.","url":"https://youtube.com/shorts/UMAKJLqmuvU","cta":"شاهد"},
+{"id":"t4","type":"short","icon":"⚡","title":"فيديو قصير ٤","desc":"دقيقة تفرق.","url":"https://youtube.com/shorts/obhpPCxm8qo","cta":"شاهد"}]},
+{"id":"app","title":"طبّق جوه التطبيق","items":[
+{"id":"a1","type":"app","icon":"✅","title":"ابني أول عادة","desc":"ابدأ صغير وكمّل.","hash":"#habits","cta":"افتح العادات"},
+{"id":"a2","type":"app","icon":"📖","title":"ورد القرآن","desc":"اسمع أو اقرأ، وحمّل للأوفلاين.","hash":"#quran","cta":"افتح القرآن"}]},
+{"id":"more","title":"تابعنا","items":[
+{"id":"ch","type":"channel","icon":"▶️","title":"قناة رشد على يوتيوب","desc":"فيديوهات جديدة بتنزل باستمرار وهتظهر هنا.","url":"https://www.youtube.com/@RushdBrand","cta":"افتح القناة"}]}]};
+let JD=JD0;try{const c=JSON.parse(localStorage.rs_jd||"null");if(c&&c.v)JD=c}catch(e){}
+(async()=>{try{const r=await fetch("journey.json?"+Math.floor(Date.now()/36e5),{cache:"no-cache"});if(r.ok){const j=await r.json();if(j&&j.groups){JD=j;localStorage.rs_jd=JSON.stringify(j);if(cur=="journey")rr()}}}catch(e){}})();
+V.push("journey");$("#app").insertAdjacentHTML("beforeend",'<section class="v" id="v-journey"></section>');
+$("#nv").insertAdjacentHTML("beforeend",'<a href="#journey" data-v="journey">الرحلة</a>');$("#tb").insertAdjacentHTML("beforeend",'<a href="#journey" data-v="journey"><b>🧭</b>الرحلة</a>');
+const jAll=()=>JD.groups.flatMap(g=>g.items),jDone=()=>g("jy",[]);
+A.jo=(id,t)=>{const it=jAll().find(x=>x.id==id);if(!it)return;const d=jDone();if(!d.includes(id)){sv("jy",[...d,id]);add(5,"كملت خطوة")}log("رحلة",id);if(it.hash){location.hash=it.hash}else if(/^https:\/\//.test(it.url||"")){window.open(it.url,"_blank","noopener")}};
+R.journey=()=>{const all=jAll(),d=jDone(),n=all.filter(x=>d.includes(x.id)).length,p=all.length?Math.round(n/all.length*100):0;return `<div class="w"><div class="hd"><h2>${esc(JD.title||"رحلتك مع رشد")}</h2><p>النوتة والفيديوهات والتطبيق في مكان واحد. كمّل خطوة خطوة.</p></div><div class="card hero"><small>تقدمك</small><h3>${n} من ${all.length} خطوة</h3><div class="xp"><i style="width:${p}%"></i></div></div>${JD.groups.map(gr=>`<h3 class="sec">${esc(gr.title)}</h3><div class="grid">${gr.items.map(it=>`<div class="card"><h3>${it.icon||""} ${esc(it.title)} ${d.includes(it.id)?"✓":""}</h3><p class="mut">${esc(it.desc||"")}</p><button${d.includes(it.id)?' class="o"':""} data-a="jo" data-v="${esc(it.id)}">${esc(it.cta||"افتح")}</button></div>`).join("")}</div>`).join("")}</div>`};
+const _hj=R.home;R.home=()=>{const h=_hj(),i=h.lastIndexOf("</div>"),all=jAll(),n=all.filter(x=>jDone().includes(x.id)).length;return h.slice(0,i)+`<div class="card" style="margin-top:16px"><h3>🧭 رحلتك مع رشد</h3><p class="mut">${n} من ${all.length} خطوة. النوتة، الفيديوهات، والتطبيق.</p><a href="#journey"><button>كمّل الرحلة</button></a></div>`+h.slice(i)};
+const _kj=kbuild;kbuild=function(){_kj();KI.push({t:"رحلتك مع رشد",f:()=>location.hash="#journey"})};
 function boot(){if(S){openApp(false);bg()}}
 if(sessionStorage.getItem("rspl")){sp.remove();boot()}else{sessionStorage.setItem("rspl",1);setTimeout(()=>sp.classList.add("out"),1900);setTimeout(()=>{sp.remove()},2800);boot()}
 
