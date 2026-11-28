@@ -1,4 +1,4 @@
-const CACHE = "rushd-gift-v12";
+const CACHE = "rushd-gift-v13";
 const ASSETS = ["./", "index.html", "manifest.webmanifest", "privacy.html", "journey.json", "a/9ad38d9743.otf", "a/dafbd0eb5b.ttf", "a/cfc62f6d46.webp", "a/51a5c835dd.webp", "a/1db58be49c.webp", "icon-180.png", "badge-96.png", "icon-192.png", "icon-512.png", "icon-maskable-192.png", "icon-maskable-512.png"];
 self.addEventListener("install", function (e) {
   e.waitUntil(caches.open(CACHE).then(function (c) { return c.addAll(ASSETS); }).then(function () { return self.skipWaiting(); }));

@@ -1,6 +1,6 @@
 {"v":1,"title":"رحلتك مع رشد","groups":[
 {"id":"start","title":"ابدأ من هنا","items":[
-{"id":"nb","type":"notebook","icon":"📓","title":"نوتة رشد","desc":"النوتة لسه مش للبيع. سجّل في قائمة الانتظار وهنبلّغك أول ما تنزل.","url":"https://rushd-brand.github.io","cta":"قائمة الانتظار"},
+{"id":"nb","type":"app","icon":"📓","title":"اكتب في نوتتك وسجّل هنا","desc":"جاوب سؤال النهارده في نوتتك الورق، وسجّله هنا عشان تكمّل السلسلة وتجمع نقاط.","hash":"#nb","cta":"افتح نوتتي"},
 {"id":"long","type":"video","icon":"🎬","title":"الفيديو الأساسي","desc":"الفكرة ورا رشد وإزاي تبدأ.","url":"https://youtu.be/mwRZgjJMJbk","cta":"شاهد على يوتيوب"}]},
 {"id":"shorts","title":"فيديوهات قصيرة","items":[
 {"id":"t1","type":"short","icon":"⚡","title":"فيديو قصير ١","desc":"دقيقة تفرق.","url":"https://youtube.com/shorts/nwZ2hKN7uXo","cta":"شاهد"},
@@ -11,4 +11,5 @@
 {"id":"a1","type":"app","icon":"✅","title":"ابني أول عادة","desc":"ابدأ صغير وكمّل.","hash":"#habits","cta":"افتح العادات"},
 {"id":"a2","type":"app","icon":"📖","title":"ورد القرآن","desc":"اسمع أو اقرأ، وحمّل للأوفلاين.","hash":"#quran","cta":"افتح القرآن"}]},
 {"id":"more","title":"تابعنا","items":[
+{"id":"inv","type":"share","icon":"🤝","title":"ابعت رشد لصاحبك","desc":"لو التطبيق فادك، ابعته لحد يستاهل يبدأ.","url":"https://wa.me/?text=%D8%B1%D8%B4%D8%AF%20%D8%B1%D9%81%D9%8A%D9%82%D9%83%20%D8%B9%D9%84%D9%89%20%D9%85%D9%87%D9%84%3A%20https%3A%2F%2Frushd-brand.github.io%2Fgift%2F","cta":"ابعت على واتساب"},
 {"id":"ch","type":"channel","icon":"▶️","title":"قناة رشد على يوتيوب","desc":"فيديوهات جديدة بتنزل باستمرار وهتظهر هنا.","url":"https://www.youtube.com/@RushdBrand","cta":"افتح القناة"}]}]}
